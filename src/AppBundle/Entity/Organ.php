@@ -69,7 +69,16 @@ class Organ
      */
     private $update_date;
 
-    
+    /**
+     * Gets id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @return string
      */
