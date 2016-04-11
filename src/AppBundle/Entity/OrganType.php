@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -42,7 +43,7 @@ class OrganType
      */
     private $organs;
 
-    
+
     /**
      * Gets id.
      *
@@ -52,7 +53,7 @@ class OrganType
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
