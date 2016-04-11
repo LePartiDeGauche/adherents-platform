@@ -71,7 +71,7 @@ class Person extends BaseUser
      * @Iri("https://schema.org/givenName")
      * @Groups({"person_read", "person_write"})
      */
-    private $firstname;
+    private $firstName;
     
     /**
      * Person's last name.
@@ -83,7 +83,7 @@ class Person extends BaseUser
      * @Iri("https://schema.org/familyName")
      * @Groups({"person_read", "person_write"})
      */
-    private $lastname;
+    private $lastName;
 
     /**
      * Person's maiden name (birth name).
@@ -94,7 +94,7 @@ class Person extends BaseUser
      * @Assert\Type(type="string")
      * @Groups({"person_read", "person_write"})
      */
-    private $maidenname;
+    private $maidenName;
 
     /**
      * Person's nickname.
@@ -272,65 +272,73 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getFirstname()
+    public function getUsername()
     {
-        return $this->firstname;
-    }
-
-    /**
-     * @param string $firstname
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
+        return $this->username;
     }
 
     /**
      * @return string
      */
-    public function getLastname()
+    public function getFirstName()
     {
-        return $this->lastname;
+        return $this->firstName;
     }
 
     /**
-     * @param string $lastname
+     * @param string $firstName
      */
-    public function setLastname($lastname)
+    public function setFirstName($firstName)
     {
-        $this->lastname = $lastname;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMaidenname()
-    {
-        return $this->maidenname;
-    }
-
-    /**
-     * @param string $maidenname
-     */
-    public function setMaidenname($maidenname)
-    {
-        $this->maidenname = $maidenname;
+        $this->firstName = $firstName;
     }
 
     /**
      * @return string
      */
-    public function getPseudonym()
+    public function getLastName()
     {
-        return $this->pseudonym;
+        return $this->lastName;
     }
 
     /**
-     * @param string $pseudonym
+     * @param string $lastName
      */
-    public function setPseudonym($pseudonym)
+    public function setLastName($lastName)
     {
-        $this->pseudonym = $pseudonym;
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMaidenName()
+    {
+        return $this->maidenName;
+    }
+
+    /**
+     * @param string $maidenName
+     */
+    public function setMaidenName($maidenName)
+    {
+        $this->maidenName = $maidenName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * @param string $nickname
+     */
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
     }
 
     /**
