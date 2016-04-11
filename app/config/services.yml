@@ -11,6 +11,36 @@ services:
                     arguments: [ { groups: [ 'person_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
 
+    resource.person:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\PersonType' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'person_type_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'person_type_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
+
+    resource.organ:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Organ' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'organ_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'organ_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
+
+    resource.organ_type:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\OrganType' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'organ_type_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'organ_type_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
+
     # Others
     fos_user.doctrine_registry:
         alias: doctrine

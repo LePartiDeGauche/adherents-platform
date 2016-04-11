@@ -7,17 +7,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * An organ type
+ * A person type
  *
- * @ORM\Table(name="organType")
+ * @ORM\Table(name="personType")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class OrganType
+class PersonType
 {
     /**
-     * @var int Organ type id.
+     * Person type id.
+     *
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -26,21 +28,23 @@ class OrganType
     protected $id;
 
     /**
-     * @var string Organ type name.
+     * Person type name.
+     *
+     * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
-     * @Groups({"organ_type_read", "organ_type_write"})
+     * @Groups({"person_type_read", "person_type_write"})
      */
     private $name;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Organ", mappedBy="type")
-     * @Groups({"organ_type_read", "organ_type_write"})
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="type")
+     * @Groups({"person_type_read", "person_type_write"})
      */
-    private $organs;
+    private $persons;
 
     /**
      * @return string
@@ -61,16 +65,16 @@ class OrganType
     /**
      * @return ArrayCollection
      */
-    public function getOrgans()
+    public function getPersons()
     {
-        return $this->organs;
+        return $this->persons;
     }
 
     /**
-     * @param ArrayCollection $organs
+     * @param ArrayCollection $persons
      */
-    public function setOrgans($organs)
+    public function setPersons($persons)
     {
-        $this->organs = $organs;
+        $this->persons = $persons;
     }
 }

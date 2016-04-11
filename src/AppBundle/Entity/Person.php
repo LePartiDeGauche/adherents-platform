@@ -193,40 +193,13 @@ class Person extends BaseUser
     private $job;
 
     /**
-     * @var string Person's status (adherent, user, suscriber, etc.)
+     * @var PersonType
      *
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Type(type="string")
-     * @Groups({"person_read", "person_write"})
+     * @ORM\ManyToOne(targetEntity="PersonType", inversedBy="persons")
+     * @Groups({"person_read", "person_read"})
      */
-    private $status;
+    private $type;
 
-
-
-
-    /**
-     * Sets id.
-     * 
-     * @param int $id
-     * 
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets id.
-     * 
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Sets email.
@@ -477,18 +450,18 @@ class Person extends BaseUser
     }
 
     /**
-     * @return string
+     * @return PersonType
      */
-    public function getStatus()
+    public function getType()
     {
-        return $this->status;
+        return $this->type;
     }
 
     /**
-     * @param string $status
+     * @param PersonType $type
      */
-    public function setStatus($status)
+    public function setType($type)
     {
-        $this->status = $status;
+        $this->type = $type;
     }
 }
