@@ -3,85 +3,241 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * A person (alive, dead, undead, or fictional).
+ * A person
  * 
  * @see http://schema.org/Person Documentation on Schema.org
- * 
+ * @ORM\Table(name="person")
  * @ORM\Entity
+ * @UniqueEntity("email")
  * @Iri("http://schema.org/Person")
+ *
+ * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class Person
+class Person extends BaseUser
 {
+    const GENDER_FEMALE = 'f';
+    const GENDER_MALE = 'm';
+    const GENDER_NONE = 'n';
+
     /**
-     * @var int
-     * 
+     * @var int Person id.
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+
     /**
-     * @var \DateTime Date of birth.
-     * 
-     * @ORM\Column(type="date", nullable=true)
-     * @Assert\Date
-     * @Iri("https://schema.org/birthDate")
+     * Email address.
+     *
+     * @var string
+     * @Assert\Email()
+     * @Iri("https://schema.org/email")
+     * @Groups({"person_read", "person_write"})
+     */
+    protected $email;
+
+    /**
+     * Person's username.
+     *
+     * @var string
+     * @Groups({"person_read", "person_write"})
+     */
+    protected $username;
+
+
+    /**
+     * Person's password.
+     *
+     * @var string
+     * @Groups({"person_read", "person_write"})
+     */
+    protected $password;
+    
+    /**
+     * Person's first name.
+     *
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/givenName")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $firstName;
+    
+    /**
+     * Person's last name.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/familyName")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $lastName;
+
+    /**
+     * Person's maiden name (birth name).
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $maidenName;
+
+    /**
+     * Person's nickname.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/additionalName")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $nickname;
+
+    /**
+     * Person's birth date.
+     *
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
+     * @Groups({"person_read", "person_write"})
      */
     private $birthDate;
+
     /**
-     * @var string A short description of the item.
-     * 
-     * @ORM\Column(nullable=true)
-     * @Assert\Type(type="string")
-     * @Iri("https://schema.org/description")
-     */
-    private $description;
-    /**
-     * @var string Gender of the person.
-     * 
-     * @ORM\Column(nullable=true)
+     * Gender of the person.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/gender")
+     * @Groups({"person_read", "person_write"})
      */
     private $gender;
+
     /**
-     * @var string The name of the item.
+     * Physical address of the item.
+     *
+     * @var string
      * 
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
-     * @Iri("https://schema.org/name")
+     * @Iri("https://schema.org/address")
+     * @Groups({"person_read", "person_write"})
      */
-    private $name;
-    /**
-     * @var string URL of the item.
-     * 
-     * @ORM\Column(nullable=true)
-     * @Assert\Url
-     * @Iri("https://schema.org/url")
-     */
-    private $url;
+    private $address;
+
 
     /**
-     * Sets id.
-     * 
-     * @param int $id
-     * 
-     * @return $this
+     * Physical city of the item.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Groups({"person_read", "person_write"})
      */
-    public function setId($id)
-    {
-        $this->id = $id;
+    private $city;
 
-        return $this;
-    }
+    /**
+     * Zip code of the city.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $zipcode;
+
+    /**
+     * Person's department.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $department;
+
+    /**
+     * Person's region.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $region;
+
+    /**
+     * Mobile phone number.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $mobilephone;
+
+    /**
+     * Phone number.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/telephone")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $phone;
+
+    /**
+     * Person's job title.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/jobTitle")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $job;
+
+    /**
+     *
+     * Person's status (adherent, user, suscriber, etc.)
+     *
+     * @var PersonType
+     *
+     * @ORM\ManyToOne(targetEntity="PersonType", inversedBy="persons")
+     * @Groups({"person_read", "person_read"})
+     */
+    private $type;
+
 
     /**
      * Gets id.
-     * 
+     *
      * @return int
      */
     public function getId()
@@ -90,22 +246,102 @@ class Person
     }
 
     /**
-     * Sets birthDate.
-     * 
-     * @param \DateTime $birthDate
-     * 
+     * Sets email.
+     *
+     * @param string $email
+     *
      * @return $this
      */
-    public function setBirthDate(\DateTime $birthDate = null)
+    public function setEmail($email)
     {
-        $this->birthDate = $birthDate;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Gets birthDate.
-     * 
+     * Gets email.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMaidenName()
+    {
+        return $this->maidenName;
+    }
+
+    /**
+     * @param string $maidenName
+     */
+    public function setMaidenName($maidenName)
+    {
+        $this->maidenName = $maidenName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * @param string $nickname
+     */
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getBirthDate()
@@ -114,46 +350,14 @@ class Person
     }
 
     /**
-     * Sets description.
-     * 
-     * @param string $description
-     * 
-     * @return $this
+     * @param \DateTime $birthDate
      */
-    public function setDescription($description)
+    public function setBirthDate($birthDate)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->birthDate = $birthDate;
     }
 
     /**
-     * Gets description.
-     * 
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Sets gender.
-     * 
-     * @param string $gender
-     * 
-     * @return $this
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Gets gender.
-     * 
      * @return string
      */
     public function getGender()
@@ -162,50 +366,154 @@ class Person
     }
 
     /**
-     * Sets name.
-     * 
-     * @param string $name
-     * 
-     * @return $this
+     * @param string $gender
      */
-    public function setName($name)
+    public function setGender($gender)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->gender = $gender;
     }
 
     /**
-     * Gets name.
-     * 
      * @return string
      */
-    public function getName()
+    public function getAddress()
     {
-        return $this->name;
+        return $this->address;
     }
 
     /**
-     * Sets url.
-     * 
-     * @param string $url
-     * 
-     * @return $this
+     * @param string $address
      */
-    public function setUrl($url)
+    public function setAddress($address)
     {
-        $this->url = $url;
-
-        return $this;
+        $this->address = $address;
     }
 
     /**
-     * Gets url.
-     * 
      * @return string
      */
-    public function getUrl()
+    public function getCity()
     {
-        return $this->url;
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * @param string $zipcode
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * @param string $department
+     */
+    public function setDepartment($department)
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * @param string $job
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMobilephone()
+    {
+        return $this->mobilephone;
+    }
+
+    /**
+     * @param string $mobilephone
+     */
+    public function setMobilephone($mobilephone)
+    {
+        $this->mobilephone = $mobilephone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return PersonType
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param PersonType $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }

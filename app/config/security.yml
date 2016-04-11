@@ -1,12 +1,31 @@
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_USER:  ROLE_USER
+        ROLE_ADMIN: ROLE_ADMIN
+        ROLE_SUPER_ADMIN: ROLE_SUPER_ADMIN
+
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+           id: fos_user.user_provider.username_email
 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
-            security: false
+        login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               api_login_check
+                username_parameter:       email
+                password_parameter:       password
+                csrf_provider:            form.csrf_provider
+            logout:       true
+            anonymous:    true
 
-        default:
-            anonymous: ~
+        api:
+            pattern:   ^/api
+            stateless: true
+            anonymous: true
+
