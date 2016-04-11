@@ -42,8 +42,7 @@ class OrganType
      * @Groups({"organ_type_read", "organ_type_write"})
      */
     private $organs;
-
-
+    
     /**
      * Gets id.
      *
