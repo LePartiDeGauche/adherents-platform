@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @see http://schema.org/Person Documentation on Schema.org
  * @ORM\Table(name="person")
  * @ORM\Entity
- * @UniqueEntity({"email"})
+ * @UniqueEntity("email")
  * @Iri("http://schema.org/Person")
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
@@ -24,6 +24,7 @@ class Person extends BaseUser
 {
     const GENDER_FEMALE = 'f';
     const GENDER_MALE = 'm';
+    const GENDER_NONE = 'n';
 
     /**
      * @var int Person id.
@@ -35,8 +36,9 @@ class Person extends BaseUser
     protected $id;
 
     /**
-     * @var string Email address.
+     * Email address.
      *
+     * @var string
      * @Assert\Email()
      * @Iri("https://schema.org/email")
      * @Groups({"person_read", "person_write"})
@@ -44,23 +46,26 @@ class Person extends BaseUser
     protected $email;
 
     /**
-     * @var string Person's username.
+     * Person's username.
      *
+     * @var string
      * @Groups({"person_read", "person_write"})
      */
     protected $username;
 
 
     /**
-     * @var string Person's password.
+     * Person's password.
      *
+     * @var string
      * @Groups({"person_read", "person_write"})
      */
     protected $password;
     
     /**
-     * @var string Person's first name.
+     * Person's first name.
      *
+     * @var string
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/givenName")
@@ -69,7 +74,9 @@ class Person extends BaseUser
     private $firstname;
     
     /**
-     * @var string Person's last name.
+     * Person's last name.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -79,7 +86,9 @@ class Person extends BaseUser
     private $lastname;
 
     /**
-     * @var string Person's maiden name (birth name).
+     * Person's maiden name (birth name).
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -88,17 +97,21 @@ class Person extends BaseUser
     private $maidenname;
 
     /**
-     * @var string Person's pseudonym.
+     * Person's nickname.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/additionalName")
      * @Groups({"person_read", "person_write"})
      */
-    private $pseudonym;
+    private $nickname;
 
     /**
-     * @var \DateTime Person's birth date.
+     * Person's birth date.
+     *
+     * @var \DateTime
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\DateTime()
@@ -107,7 +120,9 @@ class Person extends BaseUser
     private $birthdate;
 
     /**
-     * @var string Gender of the person.
+     * Gender of the person.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -117,7 +132,9 @@ class Person extends BaseUser
     private $gender;
 
     /**
-     * @var string Physical address of the item.
+     * Physical address of the item.
+     *
+     * @var string
      * 
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -128,7 +145,9 @@ class Person extends BaseUser
 
 
     /**
-     * @var string Physical city of the item.
+     * Physical city of the item.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -137,7 +156,9 @@ class Person extends BaseUser
     private $city;
 
     /**
-     * @var string Zip code of the city.
+     * Zip code of the city.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -146,7 +167,9 @@ class Person extends BaseUser
     private $zipcode;
 
     /**
-     * @var string Person's department.
+     * Person's department.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -155,7 +178,9 @@ class Person extends BaseUser
     private $department;
 
     /**
-     * @var string Person's region.
+     * Person's region.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -164,7 +189,9 @@ class Person extends BaseUser
     private $region;
 
     /**
-     * @var string Mobile phone number.
+     * Mobile phone number.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -173,7 +200,9 @@ class Person extends BaseUser
     private $mobilephone;
 
     /**
-     * @var string Phone number.
+     * Phone number.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -183,7 +212,9 @@ class Person extends BaseUser
     private $phone;
 
     /**
-     * @var string Person's job title.
+     * Person's job title.
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
@@ -193,30 +224,15 @@ class Person extends BaseUser
     private $job;
 
     /**
-     * @var string Person's status (adherent, user, suscriber, etc.)
+     * Person's status (adherent, user, suscriber, etc.)
+     *
+     * @var string
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Groups({"person_read", "person_write"})
      */
     private $status;
-
-
-
-
-    /**
-     * Sets id.
-     * 
-     * @param int $id
-     * 
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Gets id.
