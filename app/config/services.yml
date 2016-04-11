@@ -1,34 +1,16 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
 
-# Examples of API resource mapping, learn more at
-# https://github.com/dunglas/DunglasApiBundle
-    resource.book:
-        parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Book" ]
-        tags:      [ { name: "api.resource" } ]
-
+    # API resources
     resource.person:
-        parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Person" ]
-        tags:      [ { name: "api.resource" } ]
-
-    resource.organization:
-        parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Organization" ]
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Person' ]
         calls:
-            -      [ "initFilters", [ [ "@resource.organization.filter" ] ] ]
-        tags:      [ { name: "api.resource" } ]
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'person_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'person_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
 
-    resource.organization.filter:
-        parent:    "api.doctrine.orm.search_filter"
-        arguments: [ { "name": "exact", "url": "partial" } ]
-
-# A typical service
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    # Others
+    fos_user.doctrine_registry:
+        alias: doctrine
