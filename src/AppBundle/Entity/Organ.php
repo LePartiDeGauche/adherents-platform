@@ -54,11 +54,11 @@ class Organ
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
      * @Groups({"organ_read", "organ_write"})
      */
-    private $create_date;
+    private $createDate;
 
     /**
      * @var \DateTime
@@ -67,7 +67,7 @@ class Organ
      * @Assert\DateTime()
      * @Groups({"organ_read", "organ_write"})
      */
-    private $update_date;
+    private $updateDate;
 
     /**
      * Gets id.
@@ -132,15 +132,15 @@ class Organ
      */
     public function getCreateDate()
     {
-        return $this->create_date;
+        return $this->createDate;
     }
 
     /**
-     * @param \DateTime $create_date
+     * @param \DateTime $createDate
      */
-    public function setCreateDate($create_date)
+    public function setCreateDate($createDate)
     {
-        $this->create_date = $create_date;
+        $this->createDate = $createDate;
     }
 
     /**
@@ -148,14 +148,14 @@ class Organ
      */
     public function getUpdateDate()
     {
-        return $this->update_date;
+        return $this->updateDate;
     }
 
     /**
-     * @param \DateTime $update_date
+     * @param \DateTime $updateDate
      */
-    public function setUpdateDate($update_date)
+    public function setUpdateDate($updateDate)
     {
-        $this->update_date = $update_date;
+        $this->updateDate = $updateDate;
     }
 }

@@ -117,7 +117,7 @@ class Person extends BaseUser
      * @Assert\DateTime()
      * @Groups({"person_read", "person_write"})
      */
-    private $birthdate;
+    private $birthDate;
 
     /**
      * Gender of the person.
@@ -344,17 +344,17 @@ class Person extends BaseUser
     /**
      * @return \DateTime
      */
-    public function getBirthdate()
+    public function getBirthDate()
     {
-        return $this->birthdate;
+        return $this->birthDate;
     }
 
     /**
-     * @param \DateTime $birthdate
+     * @param \DateTime $birthDate
      */
-    public function setBirthdate($birthdate)
+    public function setBirthDate($birthDate)
     {
-        $this->birthdate = $birthdate;
+        $this->birthDate = $birthDate;
     }
 
     /**
