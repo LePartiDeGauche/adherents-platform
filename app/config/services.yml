@@ -9,6 +9,8 @@ services:
                     arguments: [ { groups: [ 'person_read' ] } ]
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'person_write' ] } ]
+          -         method: 'initFilters'
+                    arguments:  [[ '@resource.person.search_filter' ]]
         tags:      [ { name: 'api.resource' } ]
 
     resource.person_type:
@@ -40,6 +42,12 @@ services:
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'organ_type_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
+
+    # My filters
+    resource.person.search_filter:
+        class: 'AppBundle\Filter\PersonSearchFilter'
+        arguments:
+            -   @doctrine
 
     # Others
     fos_user.doctrine_registry:

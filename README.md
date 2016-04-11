@@ -19,3 +19,14 @@ Creating a test user
 ```shell
 php app/console fos:user:create test test@les-tilleuls.coop test
 ```
+
+To run your symfony server
+```shell
+php app/console server:start
+```
+
+You can now see a first interface of the api router on your local url :
+`http://localhost:8000/doc`
+
+To make an api request, example to get the people data :
+'http://localhost:8000/api/people'
