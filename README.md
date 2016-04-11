@@ -29,4 +29,7 @@ You can now see a first interface of the api router on your local url :
 `http://localhost:8000/doc`
 
 To make an api request, example to get the people data :
-'http://localhost:8000/api/people'
+`http://localhost:8000/api/people`
+
+To load doctrine fixtures :
+`php app/console doctrine:fixtures:load`

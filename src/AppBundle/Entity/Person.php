@@ -113,7 +113,7 @@ class Person extends BaseUser
      *
      * @var \DateTime
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
      * @Groups({"person_read", "person_write"})
      */
