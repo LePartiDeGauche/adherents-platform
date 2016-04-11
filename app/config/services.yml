@@ -11,7 +11,7 @@ services:
                     arguments: [ { groups: [ 'person_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
 
-    resource.person:
+    resource.person_type:
         parent:    'api.resource'
         arguments: [ 'AppBundle\Entity\PersonType' ]
         calls:

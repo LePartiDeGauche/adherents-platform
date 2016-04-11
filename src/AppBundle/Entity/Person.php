@@ -320,17 +320,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getPseudonym()
+    public function getNickname()
     {
-        return $this->pseudonym;
+        return $this->nickname;
     }
 
     /**
-     * @param string $pseudonym
+     * @param string $nickname
      */
-    public function setPseudonym($pseudonym)
+    public function setNickname($nickname)
     {
-        $this->pseudonym = $pseudonym;
+        $this->nickname = $nickname;
     }
 
     /**
