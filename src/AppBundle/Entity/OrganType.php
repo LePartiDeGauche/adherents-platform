@@ -40,7 +40,7 @@ class OrganType
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Organ", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="Organ", mappedBy="organType")
      * @Groups({"organ_type_read", "organ_type_write"})
      */
     private $organs;

@@ -35,14 +35,6 @@ class Organ
      * @Groups({"organ_read", "organ_write"})
      */
     private $name;
-
-    /**
-     * @var OrganType
-     *
-     * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
-     * @Groups({"organ_read", "organ_write"})
-     */
-    private $organType;
     
     /**
      * @var bool
@@ -75,6 +67,30 @@ class Organ
     private $updateDate;
 
     /**
+     * @var OrganType
+     *
+     * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $organType;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="organ")
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $persons;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PersonResponsability", mappedBy="organ")
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $personResponsabilities;
+
+    /**
      * Gets id.
      *
      * @return int
@@ -98,22 +114,6 @@ class Organ
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return OrganType
-     */
-    public function getOrganType()
-    {
-        return $this->organType;
-    }
-
-    /**
-     * @param OrganType $organType
-     */
-    public function setOrganType(OrganType $organType)
-    {
-        $this->organType = $organType;
     }
 
     /**
@@ -162,5 +162,53 @@ class Organ
     public function setUpdateDate($updateDate)
     {
         $this->updateDate = $updateDate;
+    }
+
+    /**
+     * @return OrganType
+     */
+    public function getOrganType()
+    {
+        return $this->organType;
+    }
+
+    /**
+     * @param OrganType $organType
+     */
+    public function setOrganType(OrganType $organType)
+    {
+        $this->organType = $organType;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
+
+    /**
+     * @param ArrayCollection $persons
+     */
+    public function setPersons($persons)
+    {
+        $this->persons = $persons;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPersonResponsabilities()
+    {
+        return $this->personResponsabilities;
+    }
+
+    /**
+     * @param ArrayCollection $personResponsabilities
+     */
+    public function setPersonResponsabilities($personResponsabilities)
+    {
+        $this->personResponsabilities = $personResponsabilities;
     }
 }

@@ -10,17 +10,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * A person type
+ * The responsabilities
  *
- * @ORM\Table(name="personType")
+ * @ORM\Table(name="responsability")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class PersonType
+class Responsability
 {
     /**
-     * Person type id.
+     * Responsability id.
      *
      * @var int
      *
@@ -31,24 +31,24 @@ class PersonType
     protected $id;
 
     /**
-     * Person type name.
+     * Responsability name.
      *
      * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
-     * @Groups({"person_type_read", "person_type_write"})
+     * @Groups({"responsability_read", "responsability_write"})
      */
     private $name;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Person", mappedBy="personType")
-     * @Groups({"person_type_read", "person_type_write"})
+     * @ORM\OneToMany(targetEntity="PersonResponsability", mappedBy="responsability")
+     * @Groups({"responsability_read", "responsability_write"})
      */
-    private $persons;
+    private $personResponsabilities;
 
     /**
      * Gets id.
@@ -59,7 +59,7 @@ class PersonType
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
@@ -79,16 +79,16 @@ class PersonType
     /**
      * @return ArrayCollection
      */
-    public function getPersons()
+    public function getPersonResponsabilities()
     {
-        return $this->persons;
+        return $this->personResponsabilities;
     }
 
     /**
-     * @param ArrayCollection $persons
+     * @param ArrayCollection $personResponsabilities
      */
-    public function setPersons($persons)
+    public function setPersonResponsabilities($personResponsabilities)
     {
-        $this->persons = $persons;
+        $this->personResponsabilities = $personResponsabilities;
     }
 }

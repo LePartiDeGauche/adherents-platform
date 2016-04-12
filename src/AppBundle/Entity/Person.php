@@ -62,7 +62,7 @@ class Person extends BaseUser
      * @Iri("https://schema.org/accessCode")
      * @Groups({"person_read", "person_write"})
      */
-    protected $password;
+    protected $plainPassword;
     
     /**
      * Person's first name.
@@ -238,9 +238,28 @@ class Person extends BaseUser
      * @var PersonType
      *
      * @ORM\ManyToOne(targetEntity="PersonType", inversedBy="persons")
-     * @Groups({"person_read", "person_read"})
+     * @Groups({"person_read", "person_write"})
      */
     private $personType;
+    
+    /**
+     *
+     * Person's orginal organ
+     *
+     * @var Organ
+     *
+     * @ORM\ManyToOne(targetEntity="Organ", inversedBy="persons")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $organ;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PersonResponsability", mappedBy="person")
+     * @Groups({"person_read", "person_write"})
+     */
+    private $personResponsabilities;
 
 
     /**
@@ -285,6 +304,26 @@ class Person extends BaseUser
         return $this->username;
     }
 
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * 
+     * @return Person
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        
+        return $this;
+    }
+    
     /**
      * @return string
      */
@@ -526,5 +565,37 @@ class Person extends BaseUser
     public function setPersonType(PersonType $personType)
     {
         $this->personType = $personType;
+    }
+
+    /**
+     * @return Organ
+     */
+    public function getOrgan()
+    {
+        return $this->organ;
+    }
+
+    /**
+     * @param Organ $organ
+     */
+    public function setOrgan(Organ $organ)
+    {
+        $this->organ = $organ;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPersonResponsabilities()
+    {
+        return $this->personResponsabilities;
+    }
+
+    /**
+     * @param ArrayCollection $personResponsabilities
+     */
+    public function setPersonResponsabilities($personResponsabilities)
+    {
+        $this->personResponsabilities = $personResponsabilities;
     }
 }
