@@ -3,31 +3,59 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Person;
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Hautelook\AliceBundle\Alice\DataFixtureLoader;
+use Nelmio\Alice\Fixtures;
 
-class LoadUserData implements FixtureInterface
+class LoadUserData extends DataFixtureLoader
 {
     /**
      * {@inheritDoc}
      */
-    public function load(ObjectManager $manager)
+    protected function getFixtures()
     {
-        $person = new Person();
-        $person->setAddress('1936 rue du front populaire');
-        $person->setCity('Lille');
-        $person->setEmail('jaures@gauche.fr');
-        $person->setDepartment('nord');
-        $person->setBirthdate(new \DateTime());
-        $person->setGender(Person::GENDER_MALE);
-        $person->setPhone('1936196817');
-        $person->setFirstName('Jean');
-        $person->setLastName('Jaures');
-        $person->setPlainPassword('test');
-        $person->setEnabled('true');
-        $person->setUsername('jean-jean');
+        return  array(
+            __DIR__.'/fixtures.yml',
+        );
+    }
 
-        $manager->persist($person);
-        $manager->flush();
+    /**
+     * @return string
+     */
+    public function gender()
+    {
+        $genders = array(
+            Person::GENDER_MALE,
+            Person::GENDER_FEMALE,
+            Person::GENDER_NONE,
+        );
+
+        return $genders[array_rand($genders)];
+    }
+
+    /**
+     * @return string
+     */
+    public function phone($mobile = false)
+    {
+        $firstNumbers = array('01', '02', '03', '04', '05', '08', '09');
+        if ($mobile) {
+            $firstNumbers = array('06', '07');
+        }
+
+        $number = $firstNumbers[array_rand($firstNumbers)];
+
+        for ($i = 0; $i < 8; $i++) {
+            $number .= rand(0, 9);
+        }
+
+        return $number;
+    }
+
+    /**
+     * @return string
+     */
+    public function randomRelation($type, $max)
+    {
+        return '@'.$type.rand(1, $max);
     }
 }
