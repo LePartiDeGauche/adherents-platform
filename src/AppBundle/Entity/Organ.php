@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -30,6 +31,7 @@ class Organ
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/name")
      * @Groups({"organ_read", "organ_write"})
      */
     private $name;
@@ -40,13 +42,14 @@ class Organ
      * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
      * @Groups({"organ_read", "organ_write"})
      */
-    private $type;
+    private $organType;
     
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      * @Assert\Type(type="boolean")
+     * @Iri("https://schema.org/name")
      * @Groups({"organ_read", "organ_write"})
      */
     private $enabled;
@@ -56,6 +59,7 @@ class Organ
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
+     * @Iri("https://schema.org/dateCreated")
      * @Groups({"organ_read", "organ_write"})
      */
     private $createDate;
@@ -65,6 +69,7 @@ class Organ
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
+     * @Iri("https://schema.org/dateModified")
      * @Groups({"organ_read", "organ_write"})
      */
     private $updateDate;
@@ -98,17 +103,17 @@ class Organ
     /**
      * @return OrganType
      */
-    public function getType()
+    public function getOrganType()
     {
-        return $this->type;
+        return $this->organType;
     }
 
     /**
-     * @param OrganType $type
+     * @param OrganType $organType
      */
-    public function setType($type)
+    public function setOrganType(OrganType $organType)
     {
-        $this->type = $type;
+        $this->organType = $organType;
     }
 
     /**

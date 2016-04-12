@@ -58,6 +58,8 @@ class Person extends BaseUser
      * Person's password.
      *
      * @var string
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/accessCode")
      * @Groups({"person_read", "person_write"})
      */
     protected $password;
@@ -91,7 +93,7 @@ class Person extends BaseUser
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/alternateName")
      * @Groups({"person_read", "person_write"})
      */
     private $maidenName;
@@ -106,7 +108,7 @@ class Person extends BaseUser
      * @Iri("https://schema.org/additionalName")
      * @Groups({"person_read", "person_write"})
      */
-    private $nickname;
+    private $nickName;
 
     /**
      * Person's birth date.
@@ -115,6 +117,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
+     * @Iri("https://schema.org/birthDate")
      * @Groups({"person_read", "person_write"})
      */
     private $birthDate;
@@ -138,7 +141,7 @@ class Person extends BaseUser
      * 
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
-     * @Iri("https://schema.org/address")
+     * @Iri("https://schema.org/streetAddress")
      * @Groups({"person_read", "person_write"})
      */
     private $address;
@@ -151,6 +154,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/addressLocality")
      * @Groups({"person_read", "person_write"})
      */
     private $city;
@@ -162,9 +166,10 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/postalCode")
      * @Groups({"person_read", "person_write"})
      */
-    private $zipcode;
+    private $zipCode;
 
     /**
      * Person's department.
@@ -173,6 +178,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/addressRegion")
      * @Groups({"person_read", "person_write"})
      */
     private $department;
@@ -184,6 +190,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/addressRegion")
      * @Groups({"person_read", "person_write"})
      */
     private $region;
@@ -195,9 +202,10 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/telephone")
      * @Groups({"person_read", "person_write"})
      */
-    private $mobilephone;
+    private $mobilePhone;
 
     /**
      * Phone number.
@@ -232,7 +240,7 @@ class Person extends BaseUser
      * @ORM\ManyToOne(targetEntity="PersonType", inversedBy="persons")
      * @Groups({"person_read", "person_read"})
      */
-    private $type;
+    private $personType;
 
 
     /**
@@ -328,17 +336,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getNickname()
+    public function getNickName()
     {
-        return $this->nickname;
+        return $this->nickName;
     }
 
     /**
-     * @param string $nickname
+     * @param string $nickName
      */
-    public function setNickname($nickname)
+    public function setNickName($nickName)
     {
-        $this->nickname = $nickname;
+        $this->nickName = $nickName;
     }
 
     /**
@@ -370,6 +378,9 @@ class Person extends BaseUser
      */
     public function setGender($gender)
     {
+        if (!in_array($gender, array(self::GENDER_FEMALE, self::GENDER_MALE, self::GENDER_NONE))) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
         $this->gender = $gender;
     }
 
@@ -408,17 +419,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getZipcode()
+    public function getZipCode()
     {
-        return $this->zipcode;
+        return $this->zipCode;
     }
 
     /**
-     * @param string $zipcode
+     * @param string $zipCode
      */
-    public function setZipcode($zipcode)
+    public function setZipCode($zipCode)
     {
-        $this->zipcode = $zipcode;
+        $this->zipCode = $zipCode;
     }
 
     /**
@@ -472,17 +483,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getMobilephone()
+    public function getMobilePhone()
     {
-        return $this->mobilephone;
+        return $this->mobilePhone;
     }
 
     /**
-     * @param string $mobilephone
+     * @param string $mobilePhone
      */
-    public function setMobilephone($mobilephone)
+    public function setMobilePhone($mobilePhone)
     {
-        $this->mobilephone = $mobilephone;
+        $this->mobilePhone = $mobilePhone;
     }
 
     /**
@@ -504,16 +515,16 @@ class Person extends BaseUser
     /**
      * @return PersonType
      */
-    public function getType()
+    public function getPersonType()
     {
-        return $this->type;
+        return $this->personType;
     }
 
     /**
-     * @param PersonType $type
+     * @param PersonType $personType
      */
-    public function setType($type)
+    public function setPersonType(PersonType $personType)
     {
-        $this->type = $type;
+        $this->personType = $personType;
     }
 }

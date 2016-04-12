@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -31,6 +32,7 @@ class OrganType
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/name")
      * @Groups({"organ_type_read", "organ_type_write"})
      */
     private $name;

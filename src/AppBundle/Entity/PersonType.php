@@ -3,8 +3,9 @@
 namespace AppBundle\Entity;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Dunglas\ApiBundle\Annotation\Iri;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -36,6 +37,7 @@ class PersonType
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/name")
      * @Groups({"person_type_read", "person_type_write"})
      */
     private $name;
