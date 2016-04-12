@@ -32,4 +32,4 @@ To make an api request, example to get the people data :
 `http://localhost:8000/api/people`
 
 To load doctrine fixtures :
-`php app/console doctrine:fixtures:load`
+`php app/console doctrine:fixtures:load --append`
