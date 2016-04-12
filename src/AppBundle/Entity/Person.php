@@ -10,8 +10,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * A person
- * 
+ * A person.
+ *
  * @see http://schema.org/Person Documentation on Schema.org
  * @ORM\Table(name="person")
  * @ORM\Entity
@@ -53,7 +53,6 @@ class Person extends BaseUser
      */
     protected $username;
 
-
     /**
      * Person's password.
      *
@@ -63,7 +62,7 @@ class Person extends BaseUser
      * @Groups({"person_read", "person_write"})
      */
     protected $plainPassword;
-    
+
     /**
      * Person's first name.
      *
@@ -74,7 +73,7 @@ class Person extends BaseUser
      * @Groups({"person_read", "person_write"})
      */
     private $firstName;
-    
+
     /**
      * Person's last name.
      *
@@ -93,6 +92,7 @@ class Person extends BaseUser
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\Type(type="string")
      * @Iri("https://schema.org/alternateName")
      * @Groups({"person_read", "person_write"})
      */
@@ -138,14 +138,13 @@ class Person extends BaseUser
      * Physical address of the item.
      *
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/streetAddress")
      * @Groups({"person_read", "person_write"})
      */
     private $address;
-
 
     /**
      * Physical city of the item.
@@ -232,8 +231,7 @@ class Person extends BaseUser
     private $job;
 
     /**
-     *
-     * Person's status (adherent, user, suscriber, etc.)
+     * Person's status (adherent, user, suscriber, etc.).
      *
      * @var PersonType
      *
@@ -241,10 +239,9 @@ class Person extends BaseUser
      * @Groups({"person_read", "person_write"})
      */
     private $personType;
-    
+
     /**
-     *
-     * Person's orginal organ
+     * Person's orginal organ.
      *
      * @var Organ
      *
@@ -252,15 +249,6 @@ class Person extends BaseUser
      * @Groups({"person_read", "person_write"})
      */
     private $organ;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="PersonResponsability", mappedBy="person")
-     * @Groups({"person_read", "person_write"})
-     */
-    private $personResponsabilities;
-
 
     /**
      * Gets id.
@@ -314,16 +302,16 @@ class Person extends BaseUser
 
     /**
      * @param string $plainPassword
-     * 
+     *
      * @return Person
      */
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
-        
+
         return $this;
     }
-    
+
     /**
      * @return string
      */
@@ -418,7 +406,7 @@ class Person extends BaseUser
     public function setGender($gender)
     {
         if (!in_array($gender, array(self::GENDER_FEMALE, self::GENDER_MALE, self::GENDER_NONE))) {
-            throw new \InvalidArgumentException("Invalid status");
+            throw new \InvalidArgumentException('Invalid status');
         }
         $this->gender = $gender;
     }
@@ -581,21 +569,5 @@ class Person extends BaseUser
     public function setOrgan(Organ $organ)
     {
         $this->organ = $organ;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getPersonResponsabilities()
-    {
-        return $this->personResponsabilities;
-    }
-
-    /**
-     * @param ArrayCollection $personResponsabilities
-     */
-    public function setPersonResponsabilities($personResponsabilities)
-    {
-        $this->personResponsabilities = $personResponsabilities;
     }
 }

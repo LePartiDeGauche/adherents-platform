@@ -2,13 +2,11 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * The responsability of a person
+ * The responsability of a person.
  *
  * @ORM\Table(name="personResponsability")
  * @ORM\Entity
@@ -29,8 +27,7 @@ class PersonResponsability
     protected $id;
 
     /**
-     *
-     * Person
+     * Person.
      *
      * @var Person
      *
@@ -40,8 +37,7 @@ class PersonResponsability
     private $person;
 
     /**
-     *
-     * Responsability
+     * Responsability.
      *
      * @var Responsability
      *
@@ -51,8 +47,7 @@ class PersonResponsability
     private $responsability;
 
     /**
-     *
-     * Organ
+     * Organ.
      *
      * @var Organ
      *

@@ -2,15 +2,13 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * A person type
+ * A person type.
  *
  * @ORM\Table(name="personType")
  * @ORM\Entity
@@ -43,14 +41,6 @@ class PersonType
     private $name;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Person", mappedBy="personType")
-     * @Groups({"person_type_read", "person_type_write"})
-     */
-    private $persons;
-
-    /**
      * Gets id.
      *
      * @return int
@@ -59,7 +49,7 @@ class PersonType
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
@@ -74,21 +64,5 @@ class PersonType
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getPersons()
-    {
-        return $this->persons;
-    }
-
-    /**
-     * @param ArrayCollection $persons
-     */
-    public function setPersons($persons)
-    {
-        $this->persons = $persons;
     }
 }

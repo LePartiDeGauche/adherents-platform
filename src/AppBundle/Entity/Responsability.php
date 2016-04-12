@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * The responsabilities
+ * The responsabilities.
  *
  * @ORM\Table(name="responsability")
  * @ORM\Entity
@@ -41,14 +40,6 @@ class Responsability
      * @Groups({"responsability_read", "responsability_write"})
      */
     private $name;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="PersonResponsability", mappedBy="responsability")
-     * @Groups({"responsability_read", "responsability_write"})
-     */
-    private $personResponsabilities;
 
     /**
      * Gets id.
@@ -82,13 +73,5 @@ class Responsability
     public function getPersonResponsabilities()
     {
         return $this->personResponsabilities;
-    }
-
-    /**
-     * @param ArrayCollection $personResponsabilities
-     */
-    public function setPersonResponsabilities($personResponsabilities)
-    {
-        $this->personResponsabilities = $personResponsabilities;
     }
 }
