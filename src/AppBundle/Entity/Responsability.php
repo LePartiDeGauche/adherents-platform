@@ -66,12 +66,4 @@ class Responsability
     {
         $this->name = $name;
     }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getPersonResponsabilities()
-    {
-        return $this->personResponsabilities;
-    }
 }

@@ -4,21 +4,22 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * A person type.
+ * The status.
  *
- * @ORM\Table(name="personType")
+ * @ORM\Table(name="status")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class PersonType
+class Status
 {
     /**
-     * Person type id.
+     * Status id.
      *
      * @var int
      *
@@ -29,14 +30,14 @@ class PersonType
     protected $id;
 
     /**
-     * Person type name.
+     * Status name.
      *
      * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
-     * @Groups({"person_type_read", "person_type_write"})
+     * @Groups({"status_read", "status_write"})
      */
     private $name;
 

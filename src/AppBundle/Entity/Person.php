@@ -231,16 +231,6 @@ class Person extends BaseUser
     private $job;
 
     /**
-     * Person's status (adherent, user, suscriber, etc.).
-     *
-     * @var PersonType
-     *
-     * @ORM\ManyToOne(targetEntity="PersonType", inversedBy="persons")
-     * @Groups({"person_read", "person_write"})
-     */
-    private $personType;
-
-    /**
      * Person's orginal organ.
      *
      * @var Organ
@@ -537,22 +527,6 @@ class Person extends BaseUser
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    }
-
-    /**
-     * @return PersonType
-     */
-    public function getPersonType()
-    {
-        return $this->personType;
-    }
-
-    /**
-     * @param PersonType $personType
-     */
-    public function setPersonType(PersonType $personType)
-    {
-        $this->personType = $personType;
     }
 
     /**
