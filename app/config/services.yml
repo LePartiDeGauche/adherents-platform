@@ -13,14 +13,24 @@ services:
                     arguments:  [[ '@resource.person.search_filter' ]]
         tags:      [ { name: 'api.resource' } ]
 
-    resource.person_type:
+    resource.person_status:
         parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\PersonType' ]
+        arguments: [ 'AppBundle\Entity\PersonStatus' ]
         calls:
           -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'person_type_read' ] } ]
+                    arguments: [ { groups: [ 'person_status_read' ] } ]
           -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'person_type_write' ] } ]
+                    arguments: [ { groups: [ 'person_status_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
+
+    resource.person_responsability:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\PersonResponsability' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'person_reponsability_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'person_reponsability_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
 
     resource.organ:
@@ -41,6 +51,26 @@ services:
                     arguments: [ { groups: [ 'organ_type_read' ] } ]
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'organ_type_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
+
+    resource.responsability:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Responsability' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'responsability_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'responsability_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
+
+    resource.status:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Status' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'status_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'status_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
 
     # My filters

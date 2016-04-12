@@ -8,17 +8,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * An organ type.
+ * The responsabilities.
  *
- * @ORM\Table(name="organType")
+ * @ORM\Table(name="responsability")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class OrganType
+class Responsability
 {
     /**
-     * @var int Organ type id.
+     * Responsability id.
+     *
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -27,12 +29,14 @@ class OrganType
     protected $id;
 
     /**
-     * @var string Organ type name.
+     * Responsability name.
+     *
+     * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
-     * @Groups({"organ_type_read", "organ_type_write"})
+     * @Groups({"responsability_read", "responsability_write"})
      */
     private $name;
 

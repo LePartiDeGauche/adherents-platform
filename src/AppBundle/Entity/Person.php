@@ -10,8 +10,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * A person
- * 
+ * A person.
+ *
  * @see http://schema.org/Person Documentation on Schema.org
  * @ORM\Table(name="person")
  * @ORM\Entity
@@ -53,15 +53,16 @@ class Person extends BaseUser
      */
     protected $username;
 
-
     /**
      * Person's password.
      *
      * @var string
+     * @Assert\Type(type="string")
+     * @Iri("https://schema.org/accessCode")
      * @Groups({"person_read", "person_write"})
      */
-    protected $password;
-    
+    protected $plainPassword;
+
     /**
      * Person's first name.
      *
@@ -72,7 +73,7 @@ class Person extends BaseUser
      * @Groups({"person_read", "person_write"})
      */
     private $firstName;
-    
+
     /**
      * Person's last name.
      *
@@ -92,6 +93,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/alternateName")
      * @Groups({"person_read", "person_write"})
      */
     private $maidenName;
@@ -106,7 +108,7 @@ class Person extends BaseUser
      * @Iri("https://schema.org/additionalName")
      * @Groups({"person_read", "person_write"})
      */
-    private $nickname;
+    private $nickName;
 
     /**
      * Person's birth date.
@@ -115,6 +117,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
+     * @Iri("https://schema.org/birthDate")
      * @Groups({"person_read", "person_write"})
      */
     private $birthDate;
@@ -135,14 +138,13 @@ class Person extends BaseUser
      * Physical address of the item.
      *
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
-     * @Iri("https://schema.org/address")
+     * @Iri("https://schema.org/streetAddress")
      * @Groups({"person_read", "person_write"})
      */
     private $address;
-
 
     /**
      * Physical city of the item.
@@ -151,6 +153,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/addressLocality")
      * @Groups({"person_read", "person_write"})
      */
     private $city;
@@ -162,9 +165,10 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/postalCode")
      * @Groups({"person_read", "person_write"})
      */
-    private $zipcode;
+    private $zipCode;
 
     /**
      * Person's department.
@@ -173,6 +177,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/addressRegion")
      * @Groups({"person_read", "person_write"})
      */
     private $department;
@@ -184,6 +189,7 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/addressRegion")
      * @Groups({"person_read", "person_write"})
      */
     private $region;
@@ -195,9 +201,10 @@ class Person extends BaseUser
      *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/telephone")
      * @Groups({"person_read", "person_write"})
      */
-    private $mobilephone;
+    private $mobilePhone;
 
     /**
      * Phone number.
@@ -224,16 +231,14 @@ class Person extends BaseUser
     private $job;
 
     /**
+     * Person's orginal organ.
      *
-     * Person's status (adherent, user, suscriber, etc.)
+     * @var Organ
      *
-     * @var PersonType
-     *
-     * @ORM\ManyToOne(targetEntity="PersonType", inversedBy="persons")
-     * @Groups({"person_read", "person_read"})
+     * @ORM\ManyToOne(targetEntity="Organ", inversedBy="persons")
+     * @Groups({"person_read", "person_write"})
      */
-    private $type;
-
+    private $organ;
 
     /**
      * Gets id.
@@ -275,6 +280,26 @@ class Person extends BaseUser
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     *
+     * @return Person
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     /**
@@ -328,17 +353,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getNickname()
+    public function getNickName()
     {
-        return $this->nickname;
+        return $this->nickName;
     }
 
     /**
-     * @param string $nickname
+     * @param string $nickName
      */
-    public function setNickname($nickname)
+    public function setNickName($nickName)
     {
-        $this->nickname = $nickname;
+        $this->nickName = $nickName;
     }
 
     /**
@@ -370,6 +395,9 @@ class Person extends BaseUser
      */
     public function setGender($gender)
     {
+        if (!in_array($gender, array(self::GENDER_FEMALE, self::GENDER_MALE, self::GENDER_NONE))) {
+            throw new \InvalidArgumentException('Invalid status');
+        }
         $this->gender = $gender;
     }
 
@@ -408,17 +436,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getZipcode()
+    public function getZipCode()
     {
-        return $this->zipcode;
+        return $this->zipCode;
     }
 
     /**
-     * @param string $zipcode
+     * @param string $zipCode
      */
-    public function setZipcode($zipcode)
+    public function setZipCode($zipCode)
     {
-        $this->zipcode = $zipcode;
+        $this->zipCode = $zipCode;
     }
 
     /**
@@ -472,17 +500,17 @@ class Person extends BaseUser
     /**
      * @return string
      */
-    public function getMobilephone()
+    public function getMobilePhone()
     {
-        return $this->mobilephone;
+        return $this->mobilePhone;
     }
 
     /**
-     * @param string $mobilephone
+     * @param string $mobilePhone
      */
-    public function setMobilephone($mobilephone)
+    public function setMobilePhone($mobilePhone)
     {
-        $this->mobilephone = $mobilephone;
+        $this->mobilePhone = $mobilePhone;
     }
 
     /**
@@ -502,18 +530,18 @@ class Person extends BaseUser
     }
 
     /**
-     * @return PersonType
+     * @return Organ
      */
-    public function getType()
+    public function getOrgan()
     {
-        return $this->type;
+        return $this->organ;
     }
 
     /**
-     * @param PersonType $type
+     * @param Organ $organ
      */
-    public function setType($type)
+    public function setOrgan(Organ $organ)
     {
-        $this->type = $type;
+        $this->organ = $organ;
     }
 }

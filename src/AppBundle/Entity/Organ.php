@@ -3,11 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * An organ type
+ * An organ type.
  *
  * @ORM\Table(name="organ")
  * @ORM\Entity
@@ -30,23 +31,17 @@ class Organ
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
+     * @Iri("https://schema.org/name")
      * @Groups({"organ_read", "organ_write"})
      */
     private $name;
 
     /**
-     * @var OrganType
-     *
-     * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
-     * @Groups({"organ_read", "organ_write"})
-     */
-    private $type;
-    
-    /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      * @Assert\Type(type="boolean")
+     * @Iri("https://schema.org/name")
      * @Groups({"organ_read", "organ_write"})
      */
     private $enabled;
@@ -56,6 +51,7 @@ class Organ
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
+     * @Iri("https://schema.org/dateCreated")
      * @Groups({"organ_read", "organ_write"})
      */
     private $createDate;
@@ -65,9 +61,18 @@ class Organ
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
+     * @Iri("https://schema.org/dateModified")
      * @Groups({"organ_read", "organ_write"})
      */
     private $updateDate;
+
+    /**
+     * @var OrganType
+     *
+     * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $organType;
 
     /**
      * Gets id.
@@ -96,23 +101,7 @@ class Organ
     }
 
     /**
-     * @return OrganType
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param OrganType $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -120,7 +109,7 @@ class Organ
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {
@@ -157,5 +146,21 @@ class Organ
     public function setUpdateDate($updateDate)
     {
         $this->updateDate = $updateDate;
+    }
+
+    /**
+     * @return OrganType
+     */
+    public function getOrganType()
+    {
+        return $this->organType;
+    }
+
+    /**
+     * @param OrganType $organType
+     */
+    public function setOrganType(OrganType $organType)
+    {
+        $this->organType = $organType;
     }
 }
