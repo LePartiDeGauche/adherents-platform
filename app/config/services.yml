@@ -1,103 +1,16 @@
+imports:
+    # RESOURCES
+    - { resource: services/encasement.yml }
+    - { resource: services/encasement_type.yml }
+    - { resource: services/person.yml }
+    - { resource: services/person_status.yml }
+    - { resource: services/person_responsability.yml }
+    - { resource: services/organ.yml }
+    - { resource: services/organ_type.yml }
+    - { resource: services/responsability.yml }
+    - { resource: services/status.yml }
+
 services:
-
-    # API resources
-    resource.person:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Person' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'person_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'person_write' ] } ]
-          -         method: 'initFilters'
-                    arguments:  [[ '@resource.person.search_filter' ]]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.person_status:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\PersonStatus' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'person_status_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'person_status_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.person_responsability:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\PersonResponsability' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'person_reponsability_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'person_reponsability_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.organ:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Organ' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'organ_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'organ_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.organ_type:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\OrganType' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'organ_type_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'organ_type_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.responsability:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Responsability' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'responsability_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'responsability_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.status:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Status' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'status_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'status_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.encasement:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Encasement' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'encasement_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'encasement_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    resource.encasement_type:
-        parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\EncasementType' ]
-        calls:
-          -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'encasement_type_read' ] } ]
-          -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'encasement_type_write' ] } ]
-        tags:      [ { name: 'api.resource' } ]
-
-    # My filters
-    resource.person.search_filter:
-        class: 'AppBundle\Filter\PersonSearchFilter'
-        arguments:
-            -   @doctrine
 
     # Others
     fos_user.doctrine_registry:

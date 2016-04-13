@@ -1,0 +1,26 @@
+services:
+    resource.person:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Person' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'person_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'person_write' ] } ]
+          -         method: 'initFilters'
+                    arguments:  [[ '@resource.person.search_filter', '@resource.person.order_filter', '@resource.person.gender_filter' ]]
+        tags:      [ { name: 'api.resource' } ]
+
+# My filters
+    resource.person.search_filter:
+        class: 'AppBundle\Filter\PersonSearchFilter'
+        arguments:
+            -   @doctrine
+    resource.person.order_filter:
+        class: 'AppBundle\Filter\PersonOrderFilter'
+        arguments:
+            -   @doctrine
+    resource.person.gender_filter:
+        class: 'AppBundle\Filter\PersonGenderFilter'
+        arguments:
+            -   @doctrine

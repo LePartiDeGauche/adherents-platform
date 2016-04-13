@@ -1,0 +1,11 @@
+services:
+
+    resource.responsability:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Responsability' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'responsability_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'responsability_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

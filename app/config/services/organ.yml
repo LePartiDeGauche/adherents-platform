@@ -1,0 +1,19 @@
+services:
+
+    resource.organ:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Organ' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'organ_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'organ_write' ] } ]
+          -         method: 'initFilters'
+                    arguments:  [[ '@resource.organ.search_filter' ]]
+        tags:      [ { name: 'api.resource' } ]
+
+# My filters
+    resource.organ.search_filter:
+        class: 'AppBundle\Filter\OrganSearchFilter'
+        arguments:
+            -   @doctrine

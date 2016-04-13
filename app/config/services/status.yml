@@ -1,0 +1,11 @@
+services:
+
+    resource.status:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Status' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'status_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'status_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

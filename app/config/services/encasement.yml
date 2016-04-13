@@ -1,0 +1,11 @@
+services:
+
+    resource.encasement:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Encasement' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'encasement_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'encasement_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

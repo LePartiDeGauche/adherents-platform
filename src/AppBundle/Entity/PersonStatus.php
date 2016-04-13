@@ -33,7 +33,8 @@ class PersonStatus
      *
      * @var Person
      *
-     * @ORM\ManyToOne(targetEntity="Person")
+     * @ORM\ManyToOne(targetEntity="Person", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false)
      * @Groups({"person_status_read", "person_status_write"})
      */
     private $person;
@@ -43,7 +44,8 @@ class PersonStatus
      *
      * @var Status
      *
-     * @ORM\ManyToOne(targetEntity="Status")
+     * @ORM\ManyToOne(targetEntity="Status", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(nullable=false)
      * @Groups({"person_status_read", "person_status_write"})
      */
     private $status;
