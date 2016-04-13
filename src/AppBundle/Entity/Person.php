@@ -32,6 +32,7 @@ class Person extends BaseUser
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"person_read", "person_write", "encasement_write"})
      */
     protected $id;
 

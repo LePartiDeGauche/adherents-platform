@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * An organ type.
+ * An organ.
  *
  * @ORM\Table(name="organ")
  * @ORM\Entity
