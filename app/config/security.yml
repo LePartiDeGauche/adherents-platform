@@ -18,14 +18,19 @@ security:
             anonymous: true
             form_login:
                 check_path:               api_login_check
-                username_parameter:       email
+                username_parameter:       username
                 password_parameter:       password
-                csrf_provider:            form.csrf_provider
-            logout:       true
-            anonymous:    true
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
 
         api:
             pattern:   ^/api
             stateless: true
+            lexik_jwt: ~
             anonymous: true
 
+
+    access_control:
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_ANONYMOUSLY }

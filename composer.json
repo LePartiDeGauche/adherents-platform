@@ -23,7 +23,8 @@
         "nelmio/api-doc-bundle": "~2.9@dev",
         "friendsofsymfony/http-cache-bundle": "~1.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "lexik/jwt-authentication-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
