@@ -1,0 +1,13 @@
+AppBundle\Entity\Responsability:
+    responsability1:
+        name: Secrétaire
+    responsability2:
+        name: Trésorier
+    responsability3:
+        name: Directeur
+
+AppBundle\Entity\PersonResponsability:
+    personResponsability{1..20}:
+        person: <randomRelation("person", 50)>
+        responsability: @responsability*
+        organ: <randomRelation("organ", 10)>

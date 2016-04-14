@@ -1,0 +1,20 @@
+AppBundle\Entity\Person:
+    person{1..50}:
+        email: <email()>
+        username: <username()>
+        password: <password()>
+        firstName: <firstname()>
+        lastName: <lastname()>
+        maidenName: <lastname()>
+        nickName: <username()>
+        birthDate: <dateTimeBetween('-70 years', '-20 years')>
+        gender: <gender()>
+        address: <streetAddress()>
+        city: <city()>
+        zipCode: <postcode()>
+        department: <state()>
+        region: <state()>
+        mobilePhone: <phone(true)>
+        phone: <phone()>
+        job: <word()>
+        organ: <randomRelation("organ", 10)>
