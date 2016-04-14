@@ -10,9 +10,7 @@ services:
                     arguments: [ { groups: [ 'encasement_write' ] } ]
           -         method: 'initFilters'
                     arguments:  [[ '@resource.encasement.search_filter', '@resource.encasement.order_filter' ]]
-
         tags:      [ { name: 'api.resource' } ]
-
 
 # My filters
     resource.encasement.search_filter:
