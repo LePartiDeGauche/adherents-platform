@@ -48,6 +48,7 @@ class PersonEventListener
         $mail->addRecipient($object);
         $mail->setDate(new \DateTime());
         $this->mailer->accountCreateMailer($mail);
+
         return;
     }
 
@@ -70,6 +71,7 @@ class PersonEventListener
             $mail->addRecipient($object);
             $mail->setDate(new \DateTime());
             $this->mailer->passwordUpdateMailer($mail);
+
             return;
         }
     }
@@ -89,13 +91,13 @@ class PersonEventListener
 
         $originalEvent = $this->entityManager->getUnitOfWork()->getOriginalEntityData($object);
 
-
         if ($object->getEmail() !== $originalEvent->getEmail()) {
             $mail = new Mail();
             $mail->setSender($this->mailFrom);
             $mail->addRecipient($object);
             $mail->setDate(new \DateTime());
             $this->mailer->emailUpdateMailer($mail);
+
             return;
         }
     }

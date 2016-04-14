@@ -17,7 +17,7 @@ class Mailer
     private $url;
 
     /**
-     * @param \Swift_Mailer $mailer
+     * @param \Swift_Mailer   $mailer
      * @param EngineInterface $templating
      * @param $url
      */

@@ -3,7 +3,6 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\EncasementDetail;
-use AppBundle\Entity\EncasementType;
 use AppBundle\Entity\Person;
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 use Nelmio\Alice\Fixtures;
@@ -20,7 +19,7 @@ class LoadUserData extends DataFixtureLoader
             __DIR__.'/fixtures/person.yml',
             __DIR__.'/fixtures/status.yml',
             __DIR__.'/fixtures/responsability.yml',
-            __DIR__.'/fixtures/encasement.yml'
+            __DIR__.'/fixtures/encasement.yml',
         );
     }
 
@@ -75,7 +74,7 @@ class LoadUserData extends DataFixtureLoader
             EncasementDetail::METHOD_CASH,
             EncasementDetail::METHOD_UNIQUE_DEBIT,
             EncasementDetail::METHOD_REGULAR_DEBIT,
-            EncasementDetail::METHOD_TRANSFER
+            EncasementDetail::METHOD_TRANSFER,
         );
 
         return $methods[array_rand($methods)];
