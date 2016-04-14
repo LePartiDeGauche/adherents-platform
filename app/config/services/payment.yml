@@ -1,0 +1,11 @@
+services:
+
+    resource.payment:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Payment' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'payment_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'payment_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

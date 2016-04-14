@@ -8,11 +8,11 @@ use Dunglas\ApiBundle\Doctrine\Orm\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class EncasementSearchFilter.
+ * Class OrderSearchFilter.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
-class EncasementSearchFilter implements FilterInterface
+class OrderSearchFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}

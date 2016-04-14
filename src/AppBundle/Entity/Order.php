@@ -2,20 +2,21 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * An encasement.
+ * An order.
  *
- * @ORM\Table(name="encasement")
+ * @ORM\Table(name="orders")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class Encasement
+class Order
 {
     /**
      * @var int
@@ -30,17 +31,9 @@ class Encasement
      * @var Person
      *
      * @ORM\ManyToOne(targetEntity="Person")
-     * @Groups({"encasement_read", "encasement_write"})
+     * @Groups({"order_read", "order_write"})
      */
     private $member;
-
-    /**
-     * @var Person
-     *
-     * @ORM\ManyToOne(targetEntity="Person")
-     * @Groups({"encasement_read", "encasement_write"})
-     */
-    private $payer;
 
     /**
      * @var \DateTime
@@ -48,29 +41,9 @@ class Encasement
      * @ORM\Column(type="datetime")
      * @Assert\DateTime()
      * @Iri("https://schema.org/dateCreated")
-     * @Groups({"encasement_read", "encasement_write"})
+     * @Groups({"order_read", "order_write"})
      */
     private $date;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(type="float")
-     * @Assert\Type(type="float")
-     * @Iri("https://schema.org/amount")
-     * @Groups({"encasement_read", "encasement_write"})
-     */
-    private $amountProvided;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(type="float")
-     * @Assert\Type(type="float")
-     * @Iri("https://schema.org/amount")
-     * @Groups({"encasement_read", "encasement_write"})
-     */
-    private $amountReceived;
 
     /**
      * @var string
@@ -78,25 +51,25 @@ class Encasement
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/comment")
-     * @Groups({"encasement_read", "encasement_write"})
+     * @Groups({"order_read", "order_write"})
      */
     private $comment;
 
     /**
-     * @var EncasementType
+     * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="EncasementType")
-     * @Groups({"encasement_read", "encasement_write"})
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @Groups({"order_read", "order_write"})
      */
-    private $encasementType;
+    private $product;
 
     /**
-     * @var EncasementDetail
+     * @var ArrayCollection
      *
-     * @ORM\OneToOne(targetEntity="EncasementDetail")
-     * @Groups({"encasement_read", "encasement_write"})
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="order", cascade={"persist", "remove"})
+     * @Groups({"order_read", "order_write"})
      */
-    private $encasementDetail;
+    private $payments;
 
     /**
      * Gets id.
@@ -205,34 +178,36 @@ class Encasement
     }
 
     /**
-     * @return EncasementType
+     * Add a payment for the order.
+     *
+     * @param Payment $payment
+     *
+     * @return Order
      */
-    public function getEncasementType()
+    public function addPayment(Payment $payment)
     {
-        return $this->encasementType;
+        $this->payments->add($payment);
+
+        return $this;
     }
 
     /**
-     * @param EncasementType $encasementType
+     * Remove a payment for the order.
+     *
+     * @param Payment $payment
      */
-    public function setEncasementType(EncasementType $encasementType)
+    public function removePayment(Payment $payment)
     {
-        $this->encasementType = $encasementType;
+        $this->payments->removeElement($payment);
     }
 
     /**
-     * @return EncasementDetail
-     */
-    public function getEncasementDetail()
-    {
-        return $this->encasementDetail;
-    }
 
-    /**
-     * @param EncasementDetail $encasementDetail
+     /**
+     * @return Product
      */
-    public function setEncasementDetail(EncasementDetail $encasementDetail)
+    public function getProduct()
     {
-        $this->encasementDetail = $encasementDetail;
+        return $this->product;
     }
 }
