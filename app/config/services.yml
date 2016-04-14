@@ -12,7 +12,7 @@ imports:
 
 services:
 
- # JWT Creation Listener
+# JWT Creation Listener
     jwt_created_event_listener:
         class: AppBundle\EventListener\JWTCreatedListener
         arguments:
@@ -20,6 +20,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
 
-    # Others
+# Others
     fos_user.doctrine_registry:
         alias: doctrine
+
+# Manager
+    app.mailer:
+        class: 'AppBundle\Manager\Mailer'
+        arguments: [ '@mailer', '@templating', '%url%',  ]

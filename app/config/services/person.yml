@@ -26,3 +26,12 @@ services:
         class: 'AppBundle\Filter\PersonGenderFilter'
         arguments:
             -   @doctrine
+
+# My listeners
+    person.event_listener:
+        class: 'AppBundle\EventListener\PersonEventListener'
+        arguments: [ "@app.mailer" ]
+        tags:
+          - { name: 'kernel.event_listener', event: 'api.pre_create', method: 'onPrePersonCreate' }
+          - { name: 'kernel.event_listener', event: 'api.pre_update', method: 'onPrePersonUpdate' }
+          - { name: 'kernel.event_listener', event: 'api.post_update', method: 'onPostPersonUpdate' }
