@@ -44,7 +44,6 @@ class EncasementDetail
     private $method;
 
     /**
-     *
      * Depend of payment method : check number, IBAN, etc.
      *
      * @var string
@@ -56,7 +55,6 @@ class EncasementDetail
     private $info;
 
     /**
-     *
      * Depend of payment method : bank name, BIC, etc.
      *
      * @var string
@@ -68,7 +66,6 @@ class EncasementDetail
     private $bank;
 
     /**
-     *
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
@@ -79,7 +76,6 @@ class EncasementDetail
     private $date;
 
     /**
-     *
      * @var string
      *
      * @ORM\Column(type="string")
