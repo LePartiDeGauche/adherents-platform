@@ -19,8 +19,6 @@ class PersonOrderFilter implements FilterInterface
      */
     public function apply(ResourceInterface $resource, QueryBuilder $queryBuilder, Request $request)
     {
-        //If an order was done by the user with a date or an author
-
         //Order by name
         if ($orderByPerson = $request->get('person', false)) {
             $queryBuilder->orderBy('o.lastName', 'asc' === $orderByPerson ? 'ASC' : 'DESC');

@@ -8,4 +8,17 @@ services:
                     arguments: [ { groups: [ 'responsability_read' ] } ]
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'responsability_write' ] } ]
+          -         method: 'initFilters'
+                    arguments:  [[ '@resource.responsability.search_filter',  '@resource.responsability.order_filter' ]]
         tags:      [ { name: 'api.resource' } ]
+
+# My filters
+    resource.responsability.search_filter:
+        class: 'AppBundle\Filter\ResponsabilitySearchFilter'
+        arguments:
+            -   @doctrine
+
+    resource.responsability.order_filter:
+        class: 'AppBundle\Filter\ResponsabilityOrderFilter'
+        arguments:
+            -   @doctrine
