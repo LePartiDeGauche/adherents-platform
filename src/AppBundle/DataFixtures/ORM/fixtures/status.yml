@@ -1,0 +1,22 @@
+AppBundle\Entity\Status:
+    status1:
+        name: Utilisateur
+    status2:
+        name: Abonné à gauche
+    status3:
+        name: Sympathisant
+    status4:
+        name: Contact
+    status5:
+        name: Adhérent
+    status6:
+        name: Adhérent en attente de renouvellement
+    status7:
+        name: Ancien PG
+
+AppBundle\Entity\PersonStatus:
+    personStatus{1..30}:
+        person: <randomRelation("person", 50)>
+        status: @status*
+        beginDate: <dateTimeBetween('-2 years', 'now')>
+        endDate: <dateTimeBetween($beginDate, 'now')>

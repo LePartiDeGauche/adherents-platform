@@ -17,12 +17,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Encasement
 {
-    const PAYMENT_CHECK = 'check';
-    const PAYMENT_CASH = 'cash';
-    const PAYMENT_UNIQUE_DEBIT = 'unique_debit';
-    const PAYMENT_REGULAR_DEBIT = 'regular_debit';
-    const PAYMENT_TRANSFER = 'transfer';
-
     /**
      * @var int
      *
@@ -81,26 +75,6 @@ class Encasement
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
-     * @Assert\Type(type="string")
-     * @Iri("https://schema.org/paymentMethod")
-     * @Groups({"encasement_read", "encasement_write"})
-     */
-    private $paymentMethod;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Type(type="string")
-     * @Iri("https://schema.org/name")
-     * @Groups({"encasement_read", "encasement_write"})
-     */
-    private $bankName;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/comment")
@@ -115,6 +89,14 @@ class Encasement
      * @Groups({"encasement_read", "encasement_write"})
      */
     private $encasementType;
+
+    /**
+     * @var EncasementDetail
+     *
+     * @ORM\OneToOne(targetEntity="EncasementDetail")
+     * @Groups({"encasement_read", "encasement_write"})
+     */
+    private $encasementDetail;
 
     /**
      * Gets id.
@@ -209,41 +191,6 @@ class Encasement
     /**
      * @return string
      */
-    public function getPaymentMethod()
-    {
-        return $this->paymentMethod;
-    }
-
-    /**
-     * @param string $paymentMethod
-     */
-    public function setPaymentMethod($paymentMethod)
-    {
-        if (!in_array($paymentMethod, array(self::PAYMENT_CHECK, self::PAYMENT_CASH, self::PAYMENT_UNIQUE_DEBIT, self::PAYMENT_REGULAR_DEBIT, self::PAYMENT_TRANSFER))) {
-            throw new \InvalidArgumentException('Invalid payment method');
-        }
-        $this->paymentMethod = $paymentMethod;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBankName()
-    {
-        return $this->bankName;
-    }
-
-    /**
-     * @param string $bankName
-     */
-    public function setBankName($bankName)
-    {
-        $this->bankName = $bankName;
-    }
-
-    /**
-     * @return string
-     */
     public function getComment()
     {
         return $this->comment;
@@ -271,5 +218,21 @@ class Encasement
     public function setEncasementType(EncasementType $encasementType)
     {
         $this->encasementType = $encasementType;
+    }
+
+    /**
+     * @return EncasementDetail
+     */
+    public function getEncasementDetail()
+    {
+        return $this->encasementDetail;
+    }
+
+    /**
+     * @param EncasementDetail $encasementDetail
+     */
+    public function setEncasementDetail(EncasementDetail $encasementDetail)
+    {
+        $this->encasementDetail = $encasementDetail;
     }
 }

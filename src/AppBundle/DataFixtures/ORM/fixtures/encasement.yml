@@ -1,0 +1,70 @@
+AppBundle\Entity\EncasementType:
+    encasementType1:
+        name: Cotisation militante
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: militant_subscription
+        enabled: true
+    encasementType2:
+        name: Cotisation élu local
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: elected_subscription
+        enabled: true
+    encasementType3:
+        name: Cotisation élu départemental
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: elected_subscription
+        enabled: true
+    encasementType4:
+        name: Cotisation élu régional
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: elected_subscription
+        enabled: true
+    encasementType5:
+        name: Cotisation élu national
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: elected_subscription
+        enabled: true
+    encasementType6:
+        name: Dévolution compte de campagne
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: elected_subscription
+        enabled: true
+    encasementType7:
+        name: Don à reverser
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: donation
+        enabled: true
+    encasementType8:
+        name: Don JLM
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: donation
+        enabled: false
+    encasementType9:
+        name: Don MPO
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: donation
+        enabled: true
+    encasementType10:
+        name: Don NPDCP
+        paybackRate: <randomFloat(2, 0, 1)>
+        type: donation
+        enabled: false
+
+AppBundle\Entity\EncasementDetail:
+    encasementDetail{1..30}:
+        method: <paymentMethod()>
+        info: <numerify('############################')>
+        bank: <swiftBicNumber()>
+        date: <dateTimeBetween('-1 years', 'now')>
+        proof: <imageUrl()>
+
+AppBundle\Entity\Encasement:
+    encasement{1..30}:
+        member: <randomRelation("person", 50)>
+        payer: <randomRelation("person", 50)>
+        date: <dateTimeBetween('-1 years', 'now')>
+        amountProvided: <randomNumber(2)>
+        amountReceived: <randomNumber(2)>
+        comment: 50%? <sentence(6)>
+        encasementType: @encasementType*
+        encasementDetail (unique): @encasementDetail*

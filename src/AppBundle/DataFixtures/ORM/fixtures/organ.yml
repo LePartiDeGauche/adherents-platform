@@ -1,0 +1,17 @@
+AppBundle\Entity\OrganType:
+    organType1:
+        name: Comité
+    organType2:
+        name: Département
+    organType3:
+        name: Région
+    organType4:
+        name: National
+
+AppBundle\Entity\Organ:
+    organ{1..10}:
+        name: <company()>
+        enabled: <boolean($chanceOfGettingTrue = 75)>
+        createDate: <dateTimeBetween('-7 years', 'now')>
+        updateDate: 50%? <dateTimeBetween($createDate, 'now')>
+        organType: @organType*
