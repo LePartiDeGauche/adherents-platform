@@ -104,7 +104,7 @@ class BlogPosting
     public static function getStatusList()
     {
         return array(
-            self::STATUS_TRASH   => 'trash',
+            self::STATUS_TRASH => 'trash',
             self::STATUS_DRAFT => 'draft',
             self::STATUS_PUBLISHED => 'published',
         );

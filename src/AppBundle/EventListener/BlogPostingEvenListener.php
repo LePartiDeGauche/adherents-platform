@@ -35,6 +35,7 @@ class BlogPostingEvenListener
         }
 
         $object->setDateCreated(new \DateTime());
+
         return;
     }
 }

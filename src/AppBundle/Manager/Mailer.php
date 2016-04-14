@@ -18,7 +18,7 @@ class Mailer
     private $mailFrom;
 
     /**
-     * @param \Swift_Mailer $mailer
+     * @param \Swift_Mailer   $mailer
      * @param EngineInterface $templating
      * @param $url
      * @param $mailFrom
@@ -38,10 +38,10 @@ class Mailer
      */
     public function accountCreateMailer(Mail $mail)
     {
-        if (!$mail->getSender()){
+        if (!$mail->getSender()) {
             $mail->setSender($this->mailFrom);
         }
-        
+
         $recipients = $mail->getRecipients();
         foreach ($recipients as $recipient) {
             $content = $this->templating->render(':mail:account_create.txt.twig', [
@@ -69,7 +69,7 @@ class Mailer
      */
     public function passwordUpdateMailer(Mail $mail)
     {
-        if (!$mail->getSender()){
+        if (!$mail->getSender()) {
             $mail->setSender($this->mailFrom);
         }
 
@@ -100,7 +100,7 @@ class Mailer
      */
     public function emailUpdateMailer(Mail $mail)
     {
-        if (!$mail->getSender()){
+        if (!$mail->getSender()) {
             $mail->setSender($this->mailFrom);
         }
 
@@ -130,7 +130,7 @@ class Mailer
      */
     public function mailer(Mail $mail)
     {
-        if (!$mail->getSender()){
+        if (!$mail->getSender()) {
             $mail->setSender($this->mailFrom);
         }
 
