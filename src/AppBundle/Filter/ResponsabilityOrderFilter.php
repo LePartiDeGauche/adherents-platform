@@ -8,23 +8,26 @@ use Dunglas\ApiBundle\Doctrine\Orm\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PersonWomenFilter.
+ * Class ResponsabilityOrderFilter.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
-class PersonGenderFilter implements FilterInterface
+class ResponsabilityOrderFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}
      */
     public function apply(ResourceInterface $resource, QueryBuilder $queryBuilder, Request $request)
     {
-        if ($gender = $request->get('gender', false)) {
-            $queryBuilder
-                ->andWhere('o.gender = :gender')
-                ->setParameter('gender', $gender)
-            ;
+        //Order by name
+        if ($orderByResponsability = $request->get('name', false)) {
+            $queryBuilder->orderBy('o.name', 'asc' === $orderByResponsability ? 'ASC' : 'DESC');
+
+            return;
         }
+
+        //Order by default (date:desc)
+        $queryBuilder->orderBy('o.name', 'ASC');
     }
 
     /**

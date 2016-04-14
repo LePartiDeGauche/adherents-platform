@@ -9,7 +9,7 @@ use Nelmio\Alice\Fixtures;
 class LoadUserData extends DataFixtureLoader
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function getFixtures()
     {
@@ -44,7 +44,7 @@ class LoadUserData extends DataFixtureLoader
 
         $number = $firstNumbers[array_rand($firstNumbers)];
 
-        for ($i = 0; $i < 8; $i++) {
+        for ($i = 0; $i < 8; ++$i) {
             $number .= rand(0, 9);
         }
 

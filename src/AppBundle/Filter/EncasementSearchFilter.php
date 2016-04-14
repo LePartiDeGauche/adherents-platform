@@ -8,21 +8,30 @@ use Dunglas\ApiBundle\Doctrine\Orm\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PersonWomenFilter.
+ * Class EncasementSearchFilter.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
-class PersonGenderFilter implements FilterInterface
+class EncasementSearchFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}
      */
     public function apply(ResourceInterface $resource, QueryBuilder $queryBuilder, Request $request)
     {
-        if ($gender = $request->get('gender', false)) {
+        if ($searchMember = $request->get('member', false)) {
             $queryBuilder
-                ->andWhere('o.gender = :gender')
-                ->setParameter('gender', $gender)
+                ->join('o.member', 'm')
+                ->where('m.lastName LIKE :member')
+                ->setParameter('member', '%'.$searchMember.'%')
+            ;
+        }
+
+        if ($searchPayer = $request->get('payer', false)) {
+            $queryBuilder
+                ->join('o.payer', 'p')
+                ->andWhere('p.lastName LIKE :search')
+                ->setParameter('search', '%'.$searchPayer.'%')
             ;
         }
     }

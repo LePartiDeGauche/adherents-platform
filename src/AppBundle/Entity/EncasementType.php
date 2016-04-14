@@ -17,9 +17,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class EncasementType
 {
-    const TYPE_MILITANT = "militant_subscription";
-    const TYPE_ELECTED  = "elected_subscription";
-    const TYPE_DONATION = "donation";
+    const TYPE_MILITANT = 'militant_subscription';
+    const TYPE_ELECTED = 'elected_subscription';
+    const TYPE_DONATION = 'donation';
 
     /**
      * @var int
@@ -112,7 +112,7 @@ class EncasementType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -120,7 +120,7 @@ class EncasementType
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {

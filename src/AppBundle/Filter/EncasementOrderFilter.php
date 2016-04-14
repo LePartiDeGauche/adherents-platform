@@ -8,23 +8,26 @@ use Dunglas\ApiBundle\Doctrine\Orm\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PersonWomenFilter.
+ * Class EncasementOrderFilter.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
-class PersonGenderFilter implements FilterInterface
+class EncasementOrderFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}
      */
     public function apply(ResourceInterface $resource, QueryBuilder $queryBuilder, Request $request)
     {
-        if ($gender = $request->get('gender', false)) {
-            $queryBuilder
-                ->andWhere('o.gender = :gender')
-                ->setParameter('gender', $gender)
-            ;
+        //Order by date
+        if ($orderByDate = $request->get('date', false)) {
+            $queryBuilder->orderBy('o.date', 'asc' === $orderByDate ? 'ASC' : 'DESC');
+
+            return;
         }
+
+        //Order by default (date:desc)
+        $queryBuilder->orderBy('o.date', 'DESC');
     }
 
     /**

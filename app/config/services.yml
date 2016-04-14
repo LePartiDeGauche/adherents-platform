@@ -12,6 +12,14 @@ imports:
 
 services:
 
+ # JWT Creation Listener
+    jwt_created_event_listener:
+        class: AppBundle\EventListener\JWTCreatedListener
+        arguments:
+            - '@security.token_storage'
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
     # Others
     fos_user.doctrine_registry:
         alias: doctrine

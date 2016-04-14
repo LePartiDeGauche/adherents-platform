@@ -16,10 +16,12 @@ services:
         class: 'AppBundle\Filter\PersonSearchFilter'
         arguments:
             -   @doctrine
+
     resource.person.order_filter:
         class: 'AppBundle\Filter\PersonOrderFilter'
         arguments:
             -   @doctrine
+
     resource.person.gender_filter:
         class: 'AppBundle\Filter\PersonGenderFilter'
         arguments:

@@ -8,4 +8,19 @@ services:
                     arguments: [ { groups: [ 'encasement_read' ] } ]
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'encasement_write' ] } ]
+          -         method: 'initFilters'
+                    arguments:  [[ '@resource.encasement.search_filter', '@resource.encasement.order_filter' ]]
+
         tags:      [ { name: 'api.resource' } ]
+
+
+# My filters
+    resource.encasement.search_filter:
+        class: 'AppBundle\Filter\EncasementSearchFilter'
+        arguments:
+            -   @doctrine
+
+    resource.encasement.order_filter:
+        class: 'AppBundle\Filter\EncasementOrderFilter'
+        arguments:
+            -   @doctrine
