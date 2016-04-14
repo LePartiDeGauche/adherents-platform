@@ -1,0 +1,10 @@
+services:
+    resource.category:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Category' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'blog_posting_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'blog_posting_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

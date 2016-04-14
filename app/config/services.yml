@@ -10,6 +10,8 @@ imports:
     - { resource: services/organ_type.yml }
     - { resource: services/responsability.yml }
     - { resource: services/status.yml }
+    - { resource: services/blog_posting.yml }
+    - { resource: services/category.yml }
 
 services:
 
