@@ -1,6 +1,7 @@
 imports:
     # RESOURCES
     - { resource: services/encasement.yml }
+    - { resource: services/encasement_detail.yml }
     - { resource: services/encasement_type.yml }
     - { resource: services/person.yml }
     - { resource: services/person_status.yml }

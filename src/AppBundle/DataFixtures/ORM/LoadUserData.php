@@ -2,6 +2,8 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\EncasementDetail;
+use AppBundle\Entity\EncasementType;
 use AppBundle\Entity\Person;
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 use Nelmio\Alice\Fixtures;
@@ -14,7 +16,11 @@ class LoadUserData extends DataFixtureLoader
     protected function getFixtures()
     {
         return  array(
-            __DIR__.'/fixtures.yml',
+            __DIR__.'/fixtures/organ.yml',
+            __DIR__.'/fixtures/person.yml',
+            __DIR__.'/fixtures/status.yml',
+            __DIR__.'/fixtures/responsability.yml',
+            __DIR__.'/fixtures/encasement.yml'
         );
     }
 
@@ -57,5 +63,21 @@ class LoadUserData extends DataFixtureLoader
     public function randomRelation($type, $max)
     {
         return '@'.$type.rand(1, $max);
+    }
+
+    /**
+     * @return array
+     */
+    public function paymentMethod()
+    {
+        $methods = array(
+            EncasementDetail::METHOD_CHECK,
+            EncasementDetail::METHOD_CASH,
+            EncasementDetail::METHOD_UNIQUE_DEBIT,
+            EncasementDetail::METHOD_REGULAR_DEBIT,
+            EncasementDetail::METHOD_TRANSFER
+        );
+
+        return $methods[array_rand($methods)];
     }
 }
