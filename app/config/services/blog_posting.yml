@@ -1,7 +1,7 @@
 services:
-    resource.category:
+    resource.blog_posting:
         parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Category' ]
+        arguments: [ 'AppBundle\Entity\BlogPosting' ]
         calls:
           -         method:    'initNormalizationContext'
                     arguments: [ { groups: [ 'blog_posting_read' ] } ]
