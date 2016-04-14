@@ -1,0 +1,24 @@
+services:
+
+    resource.order:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Order' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'order_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'order_write' ] } ]
+          -         method: 'initFilters'
+                    arguments:  [[ '@resource.order.search_filter', '@resource.order.order_filter' ]]
+        tags:      [ { name: 'api.resource' } ]
+
+# My filters
+    resource.order.search_filter:
+        class: 'AppBundle\Filter\OrderSearchFilter'
+        arguments:
+            -   @doctrine
+
+    resource.order.order_filter:
+        class: 'AppBundle\Filter\OrderOrderFilter'
+        arguments:
+            -   @doctrine

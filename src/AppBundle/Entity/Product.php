@@ -10,12 +10,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * An encasement type.
  *
- * @ORM\Table(name="encasementType")
+ * @ORM\Table(name="product")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class EncasementType
+class Product
 {
     const TYPE_MILITANT = 'militant_subscription';
     const TYPE_ELECTED = 'elected_subscription';
@@ -27,7 +27,7 @@ class EncasementType
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"encasement_type_read", "encasement_type_write", "encasement_write"})
+     * @Groups({"product_read", "product_write", "encasement_write"})
      */
     protected $id;
 
@@ -37,7 +37,7 @@ class EncasementType
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
-     * @Groups({"encasement_type_read", "encasement_type_write"})
+     * @Groups({"product_read", "product_write"})
      */
     private $name;
 
@@ -46,7 +46,7 @@ class EncasementType
      *
      * @ORM\Column(type="float")
      * @Assert\Type(type="float")
-     * @Groups({"encasement_type_read", "encasement_type_write"})
+     * @Groups({"product_read", "product_write"})
      */
     private $paybackRate;
 
@@ -55,7 +55,7 @@ class EncasementType
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
-     * @Groups({"encasement_type_read", "encasement_type_write"})
+     * @Groups({"product_read", "product_write"})
      */
     private $type;
 
@@ -65,9 +65,18 @@ class EncasementType
      * @ORM\Column(type="boolean")
      * @Assert\Type(type="boolean")
      * @Iri("https://schema.org/name")
-     * @Groups({"encasement_type_read", "encasement_type_write"})
+     * @Groups({"product_read", "product_write"})
      */
     private $enabled;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     * @Assert\Type(type="float")
+     * @Groups({"product_read", "product_write"})
+     */
+    private $price;
 
     /**
      * Gets id.
@@ -144,5 +153,21 @@ class EncasementType
             throw new \InvalidArgumentException('Invalid type');
         }
         $this->type = $type;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 }

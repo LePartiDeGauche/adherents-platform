@@ -3,8 +3,9 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\EncasementDetail;
-use AppBundle\Entity\EncasementType;
+use AppBundle\Entity\Payment;
 use AppBundle\Entity\Person;
+use Doctrine\Common\Collections\ArrayCollection;
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 use Nelmio\Alice\Fixtures;
 
@@ -20,7 +21,9 @@ class LoadUserData extends DataFixtureLoader
             __DIR__.'/fixtures/person.yml',
             __DIR__.'/fixtures/status.yml',
             __DIR__.'/fixtures/responsability.yml',
-            __DIR__.'/fixtures/encasement.yml'
+            __DIR__.'/fixtures/product.yml',
+            __DIR__.'/fixtures/payment.yml',
+            __DIR__.'/fixtures/order.yml',
         );
     }
 
@@ -66,18 +69,33 @@ class LoadUserData extends DataFixtureLoader
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function paymentMethod()
     {
         $methods = array(
-            EncasementDetail::METHOD_CHECK,
-            EncasementDetail::METHOD_CASH,
-            EncasementDetail::METHOD_UNIQUE_DEBIT,
-            EncasementDetail::METHOD_REGULAR_DEBIT,
-            EncasementDetail::METHOD_TRANSFER
+            Payment::METHOD_CHECK,
+            Payment::METHOD_CASH,
+            Payment::METHOD_UNIQUE_DEBIT,
+            Payment::METHOD_REGULAR_DEBIT,
+            Payment::METHOD_TRANSFER,
         );
 
         return $methods[array_rand($methods)];
+    }
+    
+    /**
+     * @return array
+     */
+    public function orderPayments()
+    {
+        $payments = new ArrayCollection();
+        $max = rand(1, 2);
+
+        for($i=0; $i<$max; $i++) {
+            $payments->add('@payment*');
+        }
+
+        return $payments;
     }
 }

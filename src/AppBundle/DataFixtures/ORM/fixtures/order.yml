@@ -1,0 +1,6 @@
+AppBundle\Entity\Order:
+    order{1..30}:
+        member: <randomRelation("person", 50)>
+        date: <dateTimeBetween('-1 years', 'now')>
+        comment: 50%? <sentence(6)>
+        product: @product*

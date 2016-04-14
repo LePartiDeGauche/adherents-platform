@@ -8,14 +8,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * An encasement detail.
+ * An payment detail.
  *
- * @ORM\Table(name="encasementDetail")
+ * @ORM\Table(name="payment")
  * @ORM\Entity
  *
  * @author Quentin Barloy <quentin@les-tilleuls.coop>
  */
-class EncasementDetail
+class Payment
 {
     const METHOD_CHECK = 'check';
     const METHOD_CASH = 'cash';
@@ -29,9 +29,26 @@ class EncasementDetail
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"encasement_detail_read", "encasement_detail_write"})
+     * @Groups({"payment_read", "payment_write"})
      */
     protected $id;
+
+    /**
+     * @var Person
+     *
+     * @ORM\ManyToOne(targetEntity="Person")
+     * @Groups({"payment_read", "payment_write"})
+     */
+    private $payer;
+
+    /**
+     * @var Order
+     *
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="payments")
+     * @Assert\NotNull
+     * @Groups({"payment_read", "payment_write"})
+     */
+    private $order;
 
     /**
      * @var string
@@ -39,54 +56,59 @@ class EncasementDetail
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/paymentMethod")
-     * @Groups({"encasement_detail_read", "encasement_detail_write"})
+     * @Groups({"payment_read", "payment_write"})
      */
     private $method;
 
     /**
-     *
      * Depend of payment method : check number, IBAN, etc.
      *
      * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
-     * @Groups({"encasement_detail_read", "encasement_detail_write"})
+     * @Groups({"payment_read", "payment_write"})
      */
     private $info;
 
     /**
-     *
      * Depend of payment method : bank name, BIC, etc.
      *
      * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
-     * @Groups({"encasement_detail_read", "encasement_detail_write"})
+     * @Groups({"payment_read", "payment_write"})
      */
     private $bank;
 
     /**
-     *
      * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      * @Assert\DateTime()
      * @Iri("https://schema.org/dateCreated")
-     * @Groups({"encasement_detail_read", "encasement_detail_write"})
+     * @Groups({"payment_read", "payment_write"})
      */
     private $date;
 
     /**
-     *
      * @var string
      *
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
-     * @Groups({"encasement_detail_read", "encasement_detail_write"})
+     * @Groups({"payment_read", "payment_write"})
      */
     private $proof;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     * @Assert\Type(type="float")
+     * @Groups({"payment_read", "payment_write"})
+     */
+    private $amount;
 
     /**
      * Gets id.
@@ -96,6 +118,38 @@ class EncasementDetail
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Person
+     */
+    public function getPayer()
+    {
+        return $this->payer;
+    }
+
+    /**
+     * @param Person $payer
+     */
+    public function setPayer(Person $payer)
+    {
+        $this->payer = $payer;
+    }
+
+    /**
+     * @return Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param Order $order
+     */
+    public function setOrder(Order $order)
+    {
+        $this->order = $order;
     }
 
     /**
@@ -179,5 +233,21 @@ class EncasementDetail
     public function setProof($proof)
     {
         $this->proof = $proof;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param float $amount
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
     }
 }

@@ -1,0 +1,9 @@
+AppBundle\Entity\Payment:
+    payment{1..30}:
+        payer: <randomRelation("person", 50)>
+        method: <paymentMethod()>
+        info: <numerify('############################')>
+        bank: <swiftBicNumber()>
+        date: <dateTimeBetween('-1 years', 'now')>
+        proof: <imageUrl()>
+        amount: <randomNumber(2)>
