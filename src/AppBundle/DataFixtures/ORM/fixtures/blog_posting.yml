@@ -1,0 +1,9 @@
+AppBundle\Entity\BlogPosting:
+    blog_posting{1..50}:
+        title: <word()>
+        articleBody: <text($maxNbChars = 200)>
+        category: @category*
+        author: <randomRelation("person", 49)>
+        dateCreated: <dateTimeBetween('-2 years', '-1 years')>
+        datePublished: <dateTimeBetween('-2 years', '-1 years')>
+        status: 'published'

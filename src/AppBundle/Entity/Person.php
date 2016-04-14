@@ -71,7 +71,7 @@ class Person extends BaseUser
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/givenName")
-     * @Groups({"person_read", "person_write"})
+     * @Groups({"person_read", "person_write", "blog_posting_read", "blog_posting_write"})
      */
     private $firstName;
 
@@ -83,7 +83,7 @@ class Person extends BaseUser
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/familyName")
-     * @Groups({"person_read", "person_write"})
+     * @Groups({"person_read", "person_write", "blog_posting_read", "blog_posting_write"})
      */
     private $lastName;
 
