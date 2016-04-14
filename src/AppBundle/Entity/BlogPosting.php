@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * A blog post.
@@ -61,8 +62,7 @@ class BlogPosting
      * @var Person.
      *
      * @ORM\ManyToOne(targetEntity="Person", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"blog_posting_read", "blog_posting_write"})
      * @Iri("https://schema.org/author")
      */

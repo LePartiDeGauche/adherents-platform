@@ -8,3 +8,11 @@ services:
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'blog_posting_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
+
+
+# My listeners
+    blog_posting.event_listener:
+        class: 'AppBundle\EventListener\BlogPostingEvenListener'
+        arguments: [ "@security.token_storage" ]
+        tags:
+          - { name: 'kernel.event_listener', event: 'api.pre_create', method: 'onPreBlogPostingCreate' }
