@@ -30,7 +30,7 @@ services:
 # My listeners
     person.event_listener:
         class: 'AppBundle\EventListener\PersonEventListener'
-        arguments: [ "@app.mailer" ]
+        arguments: [ "%mail_from%", "@app.mailer", "@doctrine.orm.entity_manager" ]
         tags:
           - { name: 'kernel.event_listener', event: 'api.pre_create', method: 'onPrePersonCreate' }
           - { name: 'kernel.event_listener', event: 'api.pre_update', method: 'onPrePersonUpdate' }

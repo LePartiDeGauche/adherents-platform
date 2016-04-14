@@ -47,7 +47,7 @@ class PersonEventListener
         $mail->setSender($this->mailFrom);
         $mail->addRecipient($object);
         $mail->setDate(new \DateTime());
-        $this->mailer->accountCreateMailer($mail);
+//        $this->mailer->accountCreateMailer($mail);
 
         return;
     }
@@ -70,7 +70,7 @@ class PersonEventListener
             $mail->setSender($this->mailFrom);
             $mail->addRecipient($object);
             $mail->setDate(new \DateTime());
-            $this->mailer->passwordUpdateMailer($mail);
+//            $this->mailer->passwordUpdateMailer($mail);
 
             return;
         }
@@ -96,7 +96,7 @@ class PersonEventListener
             $mail->setSender($this->mailFrom);
             $mail->addRecipient($object);
             $mail->setDate(new \DateTime());
-            $this->mailer->emailUpdateMailer($mail);
+//            $this->mailer->emailUpdateMailer($mail);
 
             return;
         }

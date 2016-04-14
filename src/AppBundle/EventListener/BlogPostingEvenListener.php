@@ -21,7 +21,7 @@ class BlogPostingEvenListener
     /**
      * @param DataEvent $event
      */
-    public function BlogPostingEvenListener(DataEvent $event)
+    public function onPreBlogPostingCreate(DataEvent $event)
     {
         $object = $event->getData();
 
