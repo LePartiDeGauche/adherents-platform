@@ -30,4 +30,4 @@ services:
 # Manager
     app.mailer:
         class: 'AppBundle\Manager\Mailer'
-        arguments: [ '@mailer', '@templating', '%url%',  ]
+        arguments: [ '@mailer', '@templating', '%url%', '%mail_from%' ]
