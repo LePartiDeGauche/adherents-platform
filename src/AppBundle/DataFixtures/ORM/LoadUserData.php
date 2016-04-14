@@ -20,6 +20,8 @@ class LoadUserData extends DataFixtureLoader
             __DIR__.'/fixtures/status.yml',
             __DIR__.'/fixtures/responsability.yml',
             __DIR__.'/fixtures/encasement.yml',
+            __DIR__.'/fixtures/category.yml',
+            __DIR__.'/fixtures/blog_posting.yml',
         );
     }
 
