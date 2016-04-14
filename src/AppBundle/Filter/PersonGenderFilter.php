@@ -19,12 +19,14 @@ class PersonGenderFilter implements FilterInterface
      */
     public function apply(ResourceInterface $resource, QueryBuilder $queryBuilder, Request $request)
     {
-        if ($gender = $request->get('gender', false)) {
-            $queryBuilder
-                ->andWhere('o.gender = :gender')
-                ->setParameter('gender', $gender)
-            ;
+        if (!($gender = $request->get('gender', false))) {
+            return;
         }
+
+        $queryBuilder
+            ->andWhere('o.gender = :gender')
+            ->setParameter('gender', $gender)
+        ;
     }
 
     /**
