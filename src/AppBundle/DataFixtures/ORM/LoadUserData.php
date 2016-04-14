@@ -2,7 +2,6 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\EncasementDetail;
 use AppBundle\Entity\Payment;
 use AppBundle\Entity\Person;
 use Doctrine\Common\Collections\ArrayCollection;

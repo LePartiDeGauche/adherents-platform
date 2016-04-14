@@ -7,6 +7,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 /**
  * Description of JWTCreatedListener.
+ *
+ * @author Clément Talleu <clement@les-tilleuls.coop>
  */
 class JWTCreatedListener
 {
