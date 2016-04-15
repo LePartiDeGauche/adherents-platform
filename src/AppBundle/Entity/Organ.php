@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -73,6 +74,44 @@ class Organ
      * @Groups({"organ_read", "organ_write", "person_read"})
      */
     private $organType;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="City")
+     * @ORM\JoinTable(name="organ_city",
+     *      joinColumns={@ORM\JoinColumn(name="organ_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="city_id", referencedColumnName="id", unique=false)}
+     *      )
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $cities;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Department")
+     * @ORM\JoinTable(name="organ_departments",
+     *      joinColumns={@ORM\JoinColumn(name="organ_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="department_id", referencedColumnName="id", unique=false)}
+     *      )
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $departments;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Region")
+     * @ORM\JoinTable(name="organ_regions",
+     *      joinColumns={@ORM\JoinColumn(name="organ_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="region_id", referencedColumnName="id", unique=false)}
+     *      )
+     * @Groups({"organ_read", "organ_write"})
+     */
+    private $regions;
+
+
 
     /**
      * Gets id.
@@ -162,5 +201,89 @@ class Organ
     public function setOrganType(OrganType $organType)
     {
         $this->organType = $organType;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRegions()
+    {
+        return $this->regions;
+    }
+
+    /**
+     * @param Region $region
+     *
+     * @return Organ
+     */
+    public function addRegion(Region $region)
+    {
+        $this->regions->add($region);
+
+        return $this;
+    }
+
+    /***
+     * @param Region $region
+     */
+    public function removeRegion(Region $region)
+    {
+        $this->regions->removeElement($region);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCities()
+    {
+        return $this->cities;
+    }
+
+    /**
+     * @param City $city
+     *
+     * @return Organ
+     */
+    public function addCity(City $city)
+    {
+        $this->cities->add($city);
+
+        return $this;
+    }
+
+    /***
+     * @param City $city
+     */
+    public function removeCity(City $city)
+    {
+        $this->cities->removeElement($city);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDepartments()
+    {
+        return $this->departments;
+    }
+
+    /**
+     * @param Department $department
+     *
+     * @return Organ
+     */
+    public function addDepartment(Department $department)
+    {
+        $this->departments->add($department);
+
+        return $this;
+    }
+
+    /***
+     * @param Department $department
+     */
+    public function removeDepartment(Department $department)
+    {
+        $this->departments->removeElement($department);
     }
 }
