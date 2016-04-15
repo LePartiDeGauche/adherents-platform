@@ -1,0 +1,10 @@
+services:
+    resource.city:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\City' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'city_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'city_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

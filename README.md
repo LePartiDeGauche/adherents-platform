@@ -19,6 +19,11 @@ Now you can install your database and update the schema
 php app/console doctrine:database:create && php app/console doctrine:schema:update --force
 ```
 
+And you have to import the territory SQL script
+```shell
+mysql -u mysql_user -p database_name < region_department_city.sql
+```
+
 Generates JWT keys:
 ```shell
     mkdir -p app/var

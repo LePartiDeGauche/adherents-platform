@@ -32,7 +32,7 @@ class Organ
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
-     * @Groups({"organ_read", "organ_write"})
+     * @Groups({"organ_read", "organ_write", "person_read"})
      */
     private $name;
 
@@ -42,7 +42,7 @@ class Organ
      * @ORM\Column(type="boolean")
      * @Assert\Type(type="boolean")
      * @Iri("https://schema.org/name")
-     * @Groups({"organ_read", "organ_write"})
+     * @Groups({"organ_read", "organ_write", "person_read"})
      */
     private $enabled;
 
@@ -70,7 +70,7 @@ class Organ
      * @var OrganType
      *
      * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
-     * @Groups({"organ_read", "organ_write"})
+     * @Groups({"organ_read", "organ_write", "person_read"})
      */
     private $organType;
 

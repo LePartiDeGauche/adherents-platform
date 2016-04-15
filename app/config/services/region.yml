@@ -1,0 +1,10 @@
+services:
+    resource.region:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Region' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'region_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'region_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

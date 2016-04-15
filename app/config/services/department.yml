@@ -1,0 +1,10 @@
+services:
+    resource.department:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Department' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'department_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'department_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

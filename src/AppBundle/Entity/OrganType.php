@@ -32,7 +32,7 @@ class OrganType
      * @ORM\Column(type="string")
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
-     * @Groups({"organ_type_read", "organ_type_write"})
+     * @Groups({"organ_type_read", "organ_type_write", "organ_read"})
      */
     private $name;
 
