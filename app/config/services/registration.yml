@@ -8,3 +8,11 @@ services:
           -         method:    'initDenormalizationContext'
                     arguments: [ { groups: [ 'registration_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
+
+
+# My listeners
+    registration.event_listener:
+        class: 'AppBundle\EventListener\RegistrationEventListener'
+        arguments: [ "@security.token_storage" ]
+        tags:
+          - { name: 'kernel.event_listener', event: 'api.pre_create_validation', method: 'onPreRegistrationCreate' }

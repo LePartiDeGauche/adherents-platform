@@ -12,7 +12,7 @@ services:
 
 # My listeners
     blog_posting.event_listener:
-        class: 'AppBundle\EventListener\BlogPostingEvenListener'
+        class: 'AppBundle\EventListener\BlogPostingEventListener'
         arguments: [ "@security.token_storage" ]
         tags:
-          - { name: 'kernel.event_listener', event: 'api.pre_create', method: 'onPreBlogPostingCreate' }
+          - { name: 'kernel.event_listener', event: 'api.pre_create_validation', method: 'onPreBlogPostingCreate' }

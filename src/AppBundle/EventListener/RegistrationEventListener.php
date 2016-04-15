@@ -2,11 +2,11 @@
 
 namespace AppBundle\EventListener;
 
-use AppBundle\Entity\BlogPosting;
+use AppBundle\Entity\Registration;
 use Dunglas\ApiBundle\Event\DataEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class BlogPostingEvenListener
+class RegistrationEventListener
 {
     private $tokenStorageInterface;
 
@@ -21,11 +21,11 @@ class BlogPostingEvenListener
     /**
      * @param DataEvent $event
      */
-    public function onPreBlogPostingCreate(DataEvent $event)
+    public function onPreRegistrationCreate(DataEvent $event)
     {
         $object = $event->getData();
 
-        if (!$object instanceof BlogPosting) {
+        if (!$object instanceof Registration) {
             return;
         }
 
@@ -33,9 +33,6 @@ class BlogPostingEvenListener
             $currentUser = $this->tokenStorageInterface->getToken()->getUser();
             $object->setAuthor($currentUser);
         }
-
-        $object->setDateCreated(new \DateTime());
-
         return;
     }
 }
