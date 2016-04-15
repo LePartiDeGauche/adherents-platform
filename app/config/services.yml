@@ -12,6 +12,8 @@ imports:
     - { resource: services/status.yml }
     - { resource: services/blog_posting.yml }
     - { resource: services/category.yml }
+    - { resource: services/event.yml }
+    - { resource: services/registration.yml }
 
 services:
 

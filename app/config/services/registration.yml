@@ -1,0 +1,10 @@
+services:
+    resource.registration:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Registration' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'registration_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'registration_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]

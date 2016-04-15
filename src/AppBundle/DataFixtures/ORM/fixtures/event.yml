@@ -1,0 +1,8 @@
+AppBundle\Entity\Event:
+    event{1..50}:
+        name: <word()>
+        description: <text($maxNbChars = 200)>
+        numberOfPlaces: 30
+        enabled: <boolean($chanceOfGettingTrue = 85)>
+        startTime: <dateTimeBetween('-2 years', '-1 years')>
+        endTime: <dateTimeBetween('-2 years', '-1 years')>

@@ -1,0 +1,6 @@
+AppBundle\Entity\Registration:
+    registration{1..100}:
+        event: <randomRelation("event", 49)>
+        person: <randomRelation("person", 49)>
+        numberOfRegistered: 1
+        enabled : <boolean($chanceOfGettingTrue = 85)>

@@ -1,11 +1,10 @@
 services:
-
-    resource.product:
+    resource.event:
         parent:    'api.resource'
-        arguments: [ 'AppBundle\Entity\Product' ]
+        arguments: [ 'AppBundle\Entity\Event' ]
         calls:
           -         method:    'initNormalizationContext'
-                    arguments: [ { groups: [ 'product_read' ] } ]
+                    arguments: [ { groups: [ 'event_read' ] } ]
           -         method:    'initDenormalizationContext'
-                    arguments: [ { groups: [ 'product_write' ] } ]
+                    arguments: [ { groups: [ 'event_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
