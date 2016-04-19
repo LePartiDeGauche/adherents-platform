@@ -14,6 +14,7 @@ imports:
     - { resource: services/category.yml }
     - { resource: services/event.yml }
     - { resource: services/registration.yml }
+    - { resource: services/election.yml }
 
 services:
 

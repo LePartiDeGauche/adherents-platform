@@ -1,0 +1,10 @@
+services:
+    resource.election:
+        parent:    'api.resource'
+        arguments: [ 'AppBundle\Entity\Election' ]
+        calls:
+          -         method:    'initNormalizationContext'
+                    arguments: [ { groups: [ 'election_read' ] } ]
+          -         method:    'initDenormalizationContext'
+                    arguments: [ { groups: [ 'election_write' ] } ]
+        tags:      [ { name: 'api.resource' } ]
