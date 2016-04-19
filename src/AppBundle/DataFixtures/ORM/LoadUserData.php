@@ -86,7 +86,7 @@ class LoadUserData extends DataFixtureLoader
 
         return $methods[array_rand($methods)];
     }
-    
+
     /**
      * @return array
      */
@@ -95,7 +95,7 @@ class LoadUserData extends DataFixtureLoader
         $payments = new ArrayCollection();
         $max = rand(1, 2);
 
-        for($i=0; $i<$max; $i++) {
+        for ($i = 0; $i < $max; ++$i) {
             $payments->add('@payment*');
         }
 

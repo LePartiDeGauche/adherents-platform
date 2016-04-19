@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -59,7 +58,7 @@ class Registration
      * @Groups({"registration_read", "registration_write", "event_read", "event_write"})
      */
     private $enabled;
-    
+
     /**
      * @return int
      */
@@ -117,7 +116,7 @@ class Registration
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -125,7 +124,7 @@ class Registration
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {

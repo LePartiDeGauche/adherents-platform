@@ -33,6 +33,7 @@ class RegistrationEventListener
             $currentUser = $this->tokenStorageInterface->getToken()->getUser();
             $object->setAuthor($currentUser);
         }
+
         return;
     }
 }

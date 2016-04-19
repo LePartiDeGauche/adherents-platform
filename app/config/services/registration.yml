@@ -9,7 +9,6 @@ services:
                     arguments: [ { groups: [ 'registration_write' ] } ]
         tags:      [ { name: 'api.resource' } ]
 
-
 # My listeners
     registration.event_listener:
         class: 'AppBundle\EventListener\RegistrationEventListener'
